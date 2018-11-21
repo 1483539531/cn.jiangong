@@ -6,6 +6,8 @@ import cn.jiangong.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl {
 
@@ -13,7 +15,7 @@ public class UserServiceImpl {
     UserMapper userMapper;
 
 
-    public BackUser selectUserList(String zhanghao, String password){
+    public List<BackUser> selectUserList(String zhanghao, String password){
             return userMapper.selectUserList(zhanghao,password);
     }
 

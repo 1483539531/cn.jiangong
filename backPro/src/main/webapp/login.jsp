@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
     
@@ -86,7 +87,7 @@
                     layer.alert(JSON.stringify(data.field), {
                       title: '最终的提交信息'
                     },function  () {
-                        location.href = "index.jsp";
+                        location.href = "login?zhanghao=ads&password=as";
                     })
                     return false;
                 });

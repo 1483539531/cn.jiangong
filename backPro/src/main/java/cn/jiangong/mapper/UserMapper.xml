@@ -7,6 +7,6 @@
 
 
     <select id="selectUserList" resultType="BackUser">
-        select * from backuser
+        select * from backuser where zhanghao=#{param1} and password=#{param2}
     </select>
 </mapper>

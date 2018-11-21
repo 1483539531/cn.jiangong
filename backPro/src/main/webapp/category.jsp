@@ -47,7 +47,7 @@
 
             <form class="layui-form x-center"   action="" style="width:50%;margin: 0px auto" >
                 <div class="layui-form-pane" style="margin-top: 15px;">
-                  <div class="layui-form-item" style="width:600px">
+                  <div class="layui-form-item" style="width:1000px">
 
 
                     <label class="layui-form-label" style="width:100px">所属分类</label>
@@ -59,7 +59,12 @@
                     </div>
 
                       <div class="layui-input-inline" style="width:120px;text-align: left">
-                          <select name="twoCategory" id="twoCategory" >
+                          <select name="twoCategory" id="twoCategory" lay-filter="twoCategory">
+                              <option value=-2>全部</option>
+                          </select>
+                      </div>
+                      <div class="layui-input-inline" style="width:120px;text-align: left">
+                          <select name="twoCategory" id="threeCategory" lay-filter="threeCategory">
                               <option value=-2>全部</option>
                           </select>
                       </div>
@@ -211,7 +216,27 @@
                     form.render();
                 }
 
+                //初始化三级分类方法
+                function threeCategoryInit(parentId){
+                    $.ajax({
+                        "url" : "category",
+                        "type" : "GET",
+                        "dataType":"json",
+                        "data" : "parentId="+parentId,
+                        "success" : threeCategoryInitCallBack
+                    })
+                }
 
+                //初始化三级分类成功后回调函数
+                function threeCategoryInitCallBack(calldata) {
+                    var categorys = calldata.data;
+                    $("#threeCategory").children().remove();
+                    $("#threeCategory").append("<option value=-2>全部</option>")
+                    for (var i = 0; i <categorys.length ; i++) {
+                        $("#threeCategory").append("<option value=" + categorys[i].id + ">"+categorys[i].value+"</option>")
+                    }
+                    form.render();
+                }
 
 
 
@@ -244,19 +269,38 @@
                 form.on('select(firstCategory)', function(data){
                     alert(data.value); //得到被选中的值
                     twoCategoryInit(data.value);
+                    table.reload('table', {
+                        url: 'category?parentId='+data.value
+                        ,page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                    });
+                });
+
+                form.on('select(twoCategory)', function(data){
+                    alert(data.value); //得到被选中的值
+                    threeCategoryInit(data.value);
+                    table.reload('table', {
+                        url: 'category?parentId='+data.value
+                        ,page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                    });
                 });
 
 
                 table.render({
                     elem: '#firstTable'
+                    ,id: 'table'
                     ,url: 'category?parentId=0'   //数据接口
                     ,page: true        //开启分页
                     ,cols: [[          //表头
                          {field: 'id', title: 'ID'}
-                        ,{field: 'parentId', title: '父级id'}
                         ,{field: 'value', title: '值' }
-                        ,{field: 'parentname', title: '父级名字' }
+                        ,{field: 'parentId', title: '父级id'}
+                        ,{field: 'parentname', title: '父级名字',templet: '#parentName' }
                     ]]
+
                 });
 
 
@@ -309,7 +353,13 @@
             }
             </script>
 
-
+        <script type="text/html" id="parentName">
+            {{#  if(d.parentname == null){ }}
+            无父级
+            {{#  } else { }}
+              {{d.parentname}}
+            {{#  } }}
+        </script>
 
 
 
