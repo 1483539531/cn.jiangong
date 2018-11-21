@@ -5,17 +5,14 @@
         <title>
             X-admin v1.0
         </title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="./css/x-admin.css" media="all">
-        <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="layui/css/layui.css">
         <script src="layui/layui.js"></script>
         <script src="js/jquery-1.12.4.js"></script>
+        <style>
+            .x-body{
+                padding: 20px;
+            }
+        </style>
     </head>
     <body>
 
@@ -48,7 +45,7 @@
         <div class="x-body">
 
 
-            <form class="layui-form x-center"   action="" style="width:50%" >
+            <form class="layui-form x-center"   action="" style="width:50%;margin: 0px auto" >
                 <div class="layui-form-pane" style="margin-top: 15px;">
                   <div class="layui-form-item" style="width:600px">
 
@@ -57,13 +54,13 @@
 
                     <div class="layui-input-inline" style="width:120px;text-align: left">
                         <select name="firstCategory" id="firstCategory" lay-filter="firstCategory">
-                            <option value="0">全部</option>
+                             <option value=-2>全部</option>
                         </select>
                     </div>
 
                       <div class="layui-input-inline" style="width:120px;text-align: left">
                           <select name="twoCategory" id="twoCategory" >
-
+                              <option value=-2>全部</option>
                           </select>
                       </div>
 
@@ -91,9 +88,9 @@
             </xblock>
 
 
-            <table class="layui-table">
+            <%--<table class="layui-table">
 
-                <%--id  分类名  所属父级  操作--%>
+                &lt;%&ndash;id  分类名  所属父级  操作&ndash;%&gt;
                 <thead>
                     <tr>
                         <th>
@@ -109,7 +106,7 @@
                 <tbody id="x-link">
 
 
-                    <%--需要循环的地方--%>
+                    &lt;%&ndash;需要循环的地方&ndash;%&gt;
                     <tr>
                         <td>
                             <input type="checkbox" value="1" name="">
@@ -118,7 +115,7 @@
                         <td>1</td>
                         <td>新闻</td>
 
-                        <%--编辑和删除--%>
+                        &lt;%&ndash;编辑和删除&ndash;%&gt;
                         <td class="td-manage">
 
                             <a title="编辑" href="javascript:;" onclick="cate_edit('编辑','cate-edit.html','4','','510')"
@@ -143,7 +140,11 @@
 
 
 
-            </table>
+            </table>--%>
+
+            <table id="firstTable" lay-filter="firstTable"></table>
+
+
         </div>
 
 
@@ -151,16 +152,21 @@
 
 
         <script>
-
-            layui.use(['element','layer','form'], function(){
+            layui.use(['element','layer','form','table'], function(){
                 var element = layui.element;
                 var layer = layui.layer;
                 var form = layui.form;
+                var table = layui.table;
 
 
+
+
+                /*js代码区域*/
+
+                //先初始化一级分类
                 firstCategoryInit(0);
 
-                //初始化一级分类
+                //初始化一级分类方法
                 function firstCategoryInit(parentId){
                     $.ajax({
                         "url" : "category",
@@ -170,9 +176,11 @@
                         "success" : firstCategoryInitCallBack
                     })
                 }
+                //初始化一级分类成功后回调函数
                 function firstCategoryInitCallBack(calldata) {
                     var categorys = calldata.data;
-                    $("#firstCategory").find().remove();
+                    $("#firstCategory").children().remove();
+                    $("#firstCategory").append("<option value=-2>全部</option>")
                     for (var i = 0; i <categorys.length ; i++) {
                         $("#firstCategory").append("<option value=" + categorys[i].id + ">"+categorys[i].value+"</option>")
                     }
@@ -181,7 +189,7 @@
 
 
 
-                //初始化二级分类
+                //初始化二级分类方法
                 function twoCategoryInit(parentId){
                     $.ajax({
                         "url" : "category",
@@ -191,9 +199,12 @@
                         "success" : twoCategoryInitCallBack
                     })
                 }
+
+                //初始化二级分类成功后回调函数
                 function twoCategoryInitCallBack(calldata) {
                     var categorys = calldata.data;
                     $("#twoCategory").children().remove();
+                    $("#twoCategory").append("<option value=-2>全部</option>")
                     for (var i = 0; i <categorys.length ; i++) {
                         $("#twoCategory").append("<option value=" + categorys[i].id + ">"+categorys[i].value+"</option>")
                     }
@@ -228,12 +239,30 @@
 
 
 
-
+                //layui区域
 
                 form.on('select(firstCategory)', function(data){
                     alert(data.value); //得到被选中的值
                     twoCategoryInit(data.value);
                 });
+
+
+                table.render({
+                    elem: '#firstTable'
+                    ,url: 'category?parentId=0'   //数据接口
+                    ,page: true        //开启分页
+                    ,cols: [[          //表头
+                         {field: 'id', title: 'ID'}
+                        ,{field: 'parentId', title: '父级id'}
+                        ,{field: 'value', title: '值' }
+                        ,{field: 'parentname', title: '父级名字' }
+                    ]]
+                });
+
+
+
+
+
 
                 //监听提交
               form.on('submit(add)', function(data){
