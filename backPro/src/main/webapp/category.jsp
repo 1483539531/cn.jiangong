@@ -52,6 +52,17 @@
 
                     <label class="layui-form-label" style="width:100px">所属分类</label>
 
+                      <div class="layui-input-inline" style="width:120px;text-align: left">
+                          <select name="categoryType" id="categoryType" lay-filter="categoryType">
+                              <option value='fen'>项目分类</option>
+                              <option value='huiyuan'>会员分权</option>
+                              <option value='zhiwei'>职位分类</option>
+                              <option value='yezhu'>业主分类</option>
+                              <option value='laiyuan'>资金来源分类</option>
+                          </select>
+                      </div>
+
+
                     <div class="layui-input-inline" style="width:120px;text-align: left">
                         <select name="firstCategory" id="firstCategory" lay-filter="firstCategory">
                              <option value=-2>全部</option>
@@ -73,7 +84,10 @@
                         <input type="text" name="name"  placeholder="分类名" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-input-inline" style="width:80px">
-                        <button class="layui-btn"  lay-submit="" lay-filter="add"><i class="layui-icon">&#xe608;</i>增加</button>
+                        <button class="layui-btn"  lay-submit="" lay-filter="add">
+                            <i class="layui-icon">&#xe608;</i>
+                            增加
+                        </button>
                     </div>
 
 
@@ -163,13 +177,42 @@
                 var form = layui.form;
                 var table = layui.table;
 
+                //进入页面默认显示项目分类，在数据库里类型列值为fen
+                var typeValue = 'fen';
 
 
 
-                /*js代码区域*/
+                /*js代码区域----------------------------------------------------------------*/
 
                 //先初始化一级分类
                 firstCategoryInit(0);
+
+
+                //点击分类重载一级分类
+                function categoryType(parentId,type){
+                    $.ajax({
+                        "url" : "category",
+                        "type" : "GET",
+                        "dataType":"json",
+                        "data" : "parentId="+parentId+"&type="+type,
+                        "success" : categoryTypeCallBack
+                    })
+                }
+                //点击分类重载一级分类成功后回调函数
+                function categoryTypeCallBack(calldata) {
+                    var categorys = calldata.data;
+
+                    $("#firstCategory").children().remove();
+                    $("#firstCategory").append("<option value=-2>全部</option>")
+                    $("#twoCategory").children().remove();
+                    $("#twoCategory").append("<option value=-2>全部</option>")
+
+                    for (var i = 0; i <categorys.length ; i++) {
+                        $("#firstCategory").append("<option value=" + categorys[i].id + ">"+categorys[i].value+"</option>")
+                    }
+                    form.render();
+                }
+
 
                 //初始化一级分类方法
                 function firstCategoryInit(parentId){
@@ -264,7 +307,21 @@
 
 
 
-                //layui区域
+                /*layui区域---------------------------------------------------------------------------*/
+
+                form.on('select(categoryType)', function(data){
+                    alert(data.value);         //得到被选中的值
+                    type = data.value;
+                    categoryType(0,data.value);
+                    table.reload('table', {
+                        url: 'category'
+                        ,where: {parentId:0,type:data.value }
+                        ,page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                    })
+                });
+
 
                 form.on('select(firstCategory)', function(data){
                     alert(data.value); //得到被选中的值

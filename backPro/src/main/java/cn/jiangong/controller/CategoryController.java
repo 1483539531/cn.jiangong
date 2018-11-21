@@ -23,8 +23,8 @@ public class CategoryController {
 
     @ResponseBody
     @RequestMapping("category")
-    public Object category(String parentId, HttpServletRequest request){
-        List<Categorys> categorys = categorysService.parentIdSelectCategorysList(parentId);
+    public Object category(String parentId,String type, HttpServletRequest request){
+        List<Categorys> categorys = categorysService.parentIdSelectCategorysList(parentId,type);
         HashMap<String,Object> hashMap = new  HashMap<String,Object>();
         hashMap.put("code",0);
         hashMap.put("msg","");

@@ -18,8 +18,8 @@ public class CategorysServiceImpl {
      * @param parentId
      * @return Categorys类型 List
      */
-    public List<Categorys> parentIdSelectCategorysList(String parentId){
-        return categorysMapper.parentIdSelectCategorysList(parentId);
+    public List<Categorys> parentIdSelectCategorysList(String parentId,String type){
+        return categorysMapper.parentIdSelectCategorysList(parentId,type);
     }
 
 

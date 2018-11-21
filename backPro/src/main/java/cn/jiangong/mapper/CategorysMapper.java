@@ -1,6 +1,7 @@
 package cn.jiangong.mapper;
 
 import cn.jiangong.entity.Categorys;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,5 +12,10 @@ public interface CategorysMapper {
      * @param parentId
      * @return Categorys类型 List
      */
-    public List<Categorys> parentIdSelectCategorysList(String parentId);
+    public List<Categorys> parentIdSelectCategorysList(
+            @Param("parentId") String parentId,@Param("type") String type);
+
+
+
+
 }
