@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cn.jiangong.mapper.CategorysMapper">
+
+    <select id="parentIdSelectCategorysList" resultType="Categorys">
+        SELECT id,VALUE,
+        (SELECT VALUE FROM categorys WHERE id = c.`parent_id`) parentname
+        FROM categorys c WHERE parent_id = #{parentId}
+    </select>
+
+
+</mapper>

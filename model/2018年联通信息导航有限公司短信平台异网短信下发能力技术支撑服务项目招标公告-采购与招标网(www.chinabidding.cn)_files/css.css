@@ -1,0 +1,57 @@
+﻿@charset "utf-8";
+/* CSS Document */
+p{
+	margin: 0;
+}
+.toolbar{
+	position:fixed;
+	right:0px;
+	bottom:33%;
+	width: 125px;
+	height: 240px;
+	background: #FB7222;
+	border-radius: 10px;
+	}/*导航条在右侧悬浮*/
+.title-p{
+	height: 30px;
+	line-height: 30px;
+	color:#fff;
+	text-align: center;
+	font-size:12px;
+}
+.img-box{
+	width: 125px;
+	height: 160px;
+	margin: 0 2px;
+	background: url(/public/cblcn/onlineService/images/timg.jpg) no-repeat;
+	
+}
+.img-btn{
+	cursor: pointer;
+	width: 86px;
+	height: 40px;
+	background: url(/public/cblcn/onlineService/images/timg-btn.png) no-repeat;
+	position: relative;
+	top:116px;
+	left: 18px;
+	display: inline-block;
+}
+.img-btn:hover{
+	width: 86px;
+	height: 40px;
+	background: url(/public/cblcn/onlineService/images/timg-bhover.png) no-repeat;
+}
+.hot-line,.bgf{
+	text-align: center;
+	font-size: 12px;
+	color:#fff;
+}
+.hot-line{
+	font-weight: 600;
+}
+.bgf{
+	margin-top: 5px;
+	line-height: 20px;
+	
+}
+

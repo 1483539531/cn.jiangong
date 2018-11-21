@@ -1,0 +1,201 @@
+$(function () {
+
+    var da = new Date();
+
+    $.post('/cblcn/home/logincheckAndGetMeta', 't:' + da.getTime(), function (reuslt) {
+        var member = reuslt.member;
+        if (member != null && member != "" && member.login_id != "") {
+            $(".user_name").html(member.login_id);
+            $(".login_out").prop("href", "/cblcn/Home/logout2?sid=" + member.session_id+"&url="+document.location.href+"&timestamp="+new Date().getTime());// + "&url=" + document.location.href);
+            var custRightGroup = "标准";
+            $(".dl_zc").hide();
+            if (member.cust_right_group == "0") {
+                $(".free_member").show();
+                $(".avatar").prop("src", "/public/cblcn/infoshow/images/img_xq/tx_mf_07.jpg");
+                custRightGroup="免费";
+            } else {
+                $(".d_pj").addClass("liang");
+                if (member.cust_right_group == "1") {
+                    $(".free_member").show();
+                    $(".avatar").prop("src", "/public/cblcn/infoshow/images/img_xq/tx_pt_09.jpg");
+                    custRightGroup="普通";
+                }
+                if (member.cust_right_group == "2") {
+                    $(".free_member").show();
+                    $(".avatar").prop("src", "/public/cblcn/infoshow/images/img_xq/tx_bz_09.jpg");
+                    custRightGroup="标准";
+                }
+                if (member.cust_right_group == "3") {
+                    $(".fee_member").show();
+                    $(".avatar").prop("src", "/public/cblcn/infoshow/images/img_xq/tx_vip_09.jpg");
+                    custRightGroup="VIP";
+                }
+            }
+
+            $(".no_login").hide();
+            $(".login_after").show();
+            if(member.pay_end_date&&member.cust_right_group>0){
+                var end = new Date(member.pay_end_date);
+                var cycle = end-da;
+                var day;
+                if(cycle>=0){
+                    day = cycle/ (1000 * 60 * 60 * 24);
+                    if(day>=0&&day<=28&&day%7<1){
+                        showPayEndHint(member.login_id,member.pay_end_date,custRightGroup,reuslt.meta);
+                    }
+                }
+            }
+            //专属客服
+            $(".d_zsms").html("专属客服：" + reuslt.meta.split(":")[0] + "&nbsp;" + reuslt.meta.split(":")[1]);
+        }
+    }, 'json');
+
+    /*$.post('/cblcn/Home/getMeta', 't:' + d.getTime(), function (customer) {
+        if (customer != null && customer != "")
+            $(".d_zsms").html("专属秘书 " + customer);
+    }, 'text');*/
+
+
+    //图片切换
+    $(".logo_tb img").hover(function () {
+        var si = $(this).prop("src").split(".png");
+        $(this).prop("src", si[0] + "_h.png");
+    }, function () {
+        var si = $(this).prop("src").split("_h.png");
+        $(this).prop("src", si[0] + ".png");
+    });
+
+    //tab切换
+    $(".tab_h").mouseover(function () {
+        $(".tab_b").hide();
+        $(".tab_b").eq($(this).index(".tab_h")).show();
+    });
+    $(".tab_h2").mouseover(function () {
+        $(".tab_h2").addClass("zbgg_b_gray");
+        $(this).removeClass("zbgg_b_gray");
+        $(".tab_b2").hide();
+        $(".tab_b2").eq($(this).index(".tab_h2")).show();
+    });
+
+    //打印
+    $(".print").click(function () {
+        $(".anniu,.tjgjc,.xgfj,.anniu1,.dianh,.cnxh,.guang_db,#fsk,#erweima_l,#webCall").hide();
+        $(".wamp").html($("#main_dom").html());
+        window.print();
+        location.reload();
+    });
+
+    //字体
+    $(".ft12").click(function () {
+        $(".xq_nr").css("font-size", "12px");
+    });
+    $(".ft14").click(function () {
+        $(".xq_nr").css("font-size", "14px");
+    });
+
+    //剩余采钻    太慢先注掉
+    //$.post('/cblcn/home/getCaiz','t:' + d.getTime(),function(caizuan) { $(".cz").html("我的采钻：¥" + caizuan); },'json');
+
+    //在线客服 位置
+    function erweima() {
+        $("#toolbar").stop(true, false).animate({"left": $("#nav_id").offset().left + 1000}, 500);
+    }
+    erweima();
+    $(window).resize(function () {
+        erweima();
+    });
+
+});
+function closePayHint() {
+    $("#pay_end_date_hint").hide();
+}
+function alwaysClosePayHint() {
+    $("#pay_end_date_hint").hide();
+    addCookie1("alwaysClosePayHint","true",{expires:28,path:"/"});
+}
+function addCookie1(name, value, options) {
+    if (typeof value != 'undefined') { // name and value given, set cookie
+        options = options || {};
+        if (value === null) {
+            value = '';
+            options.expires = -1;
+        }
+        var expires = '';
+        if (options.expires && (typeof options.expires == 'number' || options.expires.toUTCString)) {
+            var date;
+            if (typeof options.expires == 'number') {
+                date = new Date();
+                date.setTime(date.getTime() + (options.expires * 24 * 60 * 60 * 1000));
+            } else {
+                date = options.expires;
+            }
+            expires = '; expires=' + date.toUTCString(); // use expires attribute, max-age is not supported by IE
+        }
+        // CAUTION: Needed to parenthesize options.path and options.domain
+        // in the following expressions, otherwise they evaluate to undefined
+        // in the packed version for some reason...
+        var path = options.path ? '; path=' + (options.path) : '';
+        var domain = options.domain ? '; domain=' + (options.domain) : '';
+        var secure = options.secure ? '; secure' : '';
+        document.cookie = [name, '=', encodeURIComponent(value), expires, path, domain, secure].join('');
+    } else { // only name given, get cookie
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+}
+function getCookie(name)
+{
+    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+    if(arr=document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
+}
+function showPayEndHint(longin_id,pay_end_date,custRightGroup,meta) {
+    var cookie = getCookie("closePayHint");
+    var kname,kphone
+    if(meta){
+        var split = meta.split(":");
+        if(split.length >=2){
+            if(split[0]!='null'&&split[1]!='null'){
+                kname=split[0];
+                kphone=split[1];
+            }
+        }
+    }
+    if(!cookie&&!getCookie("alwaysClosePayHint")){
+        var hint = $("#pay_end_date_hint");
+        if(hint.length>0){
+            hint.show();
+        }else{
+            var Width = $("body").width();
+            var left = (Width - 400)/2;
+            var hint_div = "<div class='khtc' style='left:"+left+"px' id='pay_end_date_hint'>"
+                +"<h3 class='kh_biao'><img src='https://cdn.chinabidding.cn/public/cblcn/index3/images/kh_tb_03.jpg'/>温馨提示</h3>"
+                +"<h3 class='kh_xb'>尊敬的客户:</h3>"
+                +"<p>您好！</p>"
+                +"<p> &nbsp;  &nbsp;  &nbsp;  &nbsp;您的采招"+custRightGroup+"会员将于 <strong>"+pay_end_date+" </strong>到期，为了不影响您的账号正常使用，请致电您的专属客服：</p><p>"
+            if(kphone&&kname){
+                hint_div+="<span style='color:#fd7100;font-weight: bold'>"+meta+"</span> 或"
+            }
+            hint_div +="致电 <span style='color:#fd7100;font-weight: bold'>400-006-6655</span>转<span style='color:#fd7100;font-weight: bold'>2</span>，办理续费服务。</p>"
+                +"<br><p><span style=\"color:red;font-weight: bold;font-size:15px\">特别提醒</span>：近期有骗子冒充我网工作人员索要您的网站账号和密码，请不要告知，我网工作人员是不会向会员索要这些信息，请勿上当受骗，如有疑问，请拨打服务热线 400-006-6655转2 ！</p>"
+                +"<p class='kh_dj'><a href='javascript:;' onclick='closePayHint()'>关闭</a><a href='javascript:;' onclick='alwaysClosePayHint()'>下次不再提示</a></p>"
+                +"</div>";
+            $("body").append(hint_div);
+        }
+        return true;
+    }
+    return false;
+}

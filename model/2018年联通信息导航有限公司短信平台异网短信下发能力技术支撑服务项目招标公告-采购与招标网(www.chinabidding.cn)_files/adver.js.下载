@@ -1,0 +1,138 @@
+$(function () {
+
+    var d = new Date();
+
+    //招标信息 - 频道首页
+    /*$("#zbxx_banner_bd").html("<li><a href='javascript:;'><img src='https://cdn.chinabidding.cn/public/cblcn/cgxx/images/banner_10.jpg'/></a></li>");
+    $("#zbxx_banner_hd").append("<li>1</li>");
+    $("#zbxx_banner_bd").append("<li><a target='_blank' href='http://lucky.chinabidding.cn/'><img src='https://cdn.chinabidding.cn/public/static/images/570.jpg'/></a></li>");
+    $("#zbxx_banner_hd").append("<li>2</li>");
+    $("#zbxx_banner_bd").append("<li><a target='_blank' href='/public/static/qypj/index.html'><img src='https://cdn.chinabidding.cn/public/static/images/zxpj.jpg'/></a></li>");
+    */
+    if (d < new Date("2017/12/13"))
+        $("#zbxx_adv_1").html("<a href='http://www.whzydz.com/' title='武汉中原电子信息有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/zydz.jpg'/></a>");
+    /* if(d < new Date("2017/10/15"))
+         $("#zbxx_adv_1").html("<a href='http://www.hahuaxu.com/' title='哈尔滨华旭仓储设备有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/huaxu.jpg'/></a>");
+ */
+    if (d < new Date("2017/11/8"))
+        $("#zbxx_adv_2").html("<a href='http://www.jbwanglan.cn/' title='北京铁路局保定工务器材厂' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/jbspz.jpg'/></a>");
+    /*if(d < new Date("2017/8/12"))
+        $("#zbxx_adv_2").html("<a href='http://www.cqcyit.com/cqitd/' title='重庆信科设计有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/cqcyit.jpg'/></a>");*/
+    if (d < new Date("2017/9/18"))
+        $("#zbxx_adv_3").html("<a href='http://www.ykl.cn/' title='上海亚卡黎实业有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/yakali.jpg'/></a>");
+    if (d < new Date("2017/8/16"))
+        $("#zbxx_adv_4").html("<a href='http://www.arcvideo.cn/' title='杭州当虹科技有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/arcvideo.jpg'/></a>");
+    if (d < new Date("2017/8/9"))
+        $("#zbxx_adv_5").html("<a href='http://www.jbwanglan.cn/' title='河北金标建材科技股份有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/jbwanglan.jpg'/></a>");
+    if (d < new Date("2017/9/22"))
+        $("#zbxx_adv_6").html("<a href='http://www.talent-sci.com/' title='钛能科技股份有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/telentelec.jpg'/></a>");
+    if (d < new Date("2017/9/26"))
+        $("#zbxx_adv_7").html("<a href='http://www.cncohen.com' title='江苏科行环保' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/cohen.jpg'/></a>");
+    if (d < new Date("2017/9/28"))
+        $("#zbxx_adv_8").html("<a href='http://www.fsdxdl.cn/' title='哈尔滨丰盛电线电缆有限责任公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/fswc.jpg'/></a>");
+    //if(d < new Date("2017/3/2"))
+    //    $("#zbxx_adv_9").html("<a href='http://www.scalt.net' title='四川省奥莱特路桥机械有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/cblcn/cgxx/images/9.02_zb9.jpg'/></a>");
+    if (d < new Date("2017/5/28"))
+        $("#zbxx_adv_9").html("<a href='http://www.bjtywt.com/' title='北京天宇沃特仪表科技有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/bjtywt.jpg'/></a>");
+    if (d < new Date("2017/7/4"))
+        $("#zbxx_adv_10").html("<a href='http://www.chinasaisi.com/' title='上海赛狮鞋业有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/chinasaisi.jpg'/></a>");
+
+
+    //采购信息 - 频道首页
+    /*$("#cgxx_banner_bd").html("<li><a href='javascript:;'><img src='https://cdn.chinabidding.cn/public/cblcn/cgxx/images/banner_10.jpg'/></a></li>");
+    $("#cgxx_banner_hd").append("<li>1</li>");
+    $("#cgxx_banner_bd").append("<li><a target='_blank' href='http://lucky.chinabidding.cn/'><img src='https://cdn.chinabidding.cn/public/static/images/570.jpg'/></a></li>");
+    $("#cgxx_banner_hd").append("<li>2</li>");
+    $("#cgxx_banner_bd").append("<li><a target='_blank' href='http://app.chinabidding.cn/'><img src='https://cdn.chinabidding.cn/public/static/images/czq.png'/></a></li>");
+    $("#cgxx_banner_hd").append("<li>3</li>");
+    $("#cgxx_banner_bd").append("<li><a target='_blank' href='/public/static/qypj/index.html'><img src='https://cdn.chinabidding.cn/public/static/images/zxpj.jpg'/></a></li>");
+    */
+    if (d < new Date("2017/1/15"))
+        $("#cgxx_adv_1").html("<a href='http://www.hbfan.com/' title='湖北省风机厂有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/hbfan.jpg'/></a>");
+    if (d < new Date("2017/1/15"))
+        $("#cgxx_adv_2").html("<a href='http://www.sjpec.cn/' title='胜利油田胜机石油装备有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/sjpec.jpg'/></a>");
+    if (d < new Date("2017/1/24"))
+        $("#cgxx_adv_3").html("<a href='http://www.ytsdl.cn/' title='烟台市电缆厂' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/ytsdl.jpg'/></a>");
+    if (d < new Date("2017/1/24"))
+        $("#cgxx_adv_4").html("<a href='http://www.cqszdl.cn/' title='重庆神舟电缆集团股份有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/cqszdl.jpg'/></a>");
+    if (d < new Date("2017/1/24"))
+        $("#cgxx_adv_5").html("<a href='http://17390787.czvv.com/' title='重庆科新电气有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/czvv.jpg'/></a>");
+    if (d < new Date("2017/1/24"))
+        $("#cgxx_adv_6").html("<a href='http://www.cmdi.chinamobile.com/companyorgitem.aspx?ID=1102&ChannelId=1&ColumnId=128' title='北京煜金桥通信建设监理咨询有限责任公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/chinamobile.jpg'/></a>");
+    if (d < new Date("2017/2/26"))
+        $("#cgxx_adv_7").html("<a href='http://www.ht-wwpmc.com/' title='上海宏同万邦建设工程咨询有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/wwpmc.jpg'/></a>");
+    if (d < new Date("2017/1/24"))
+        $("#cgxx_adv_8").html("<a href='http://www.wxhuali.net/' title='无锡华力钢杆有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/cblcn/cgxx/images/9.23_cg8.jpg'/></a>");
+    if (d < new Date("2017/1/28"))
+        $("#cgxx_adv_9").html("<a href='http://www.sxktehg.com/' title='山西康特尔精细化工有限责任公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/sxktehg.jpg'/></a>");
+    if (d < new Date("2017/1/28"))
+        $("#cgxx_adv_10").html("<a href='http://www.huaxintouzijituan.com/index.html' title='河北华信投资集团有限公司沧州分公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/hxtz.jpg'/></a>");
+
+
+    //项目信息 - 频道首页
+    /*$("#xmxx_banner_bd").html("<li><a href='javascript:;'><img src='https://cdn.chinabidding.cn/public/cblcn/cgxx/images/banner_10.jpg'/></a></li>");
+    $("#xmxx_banner_hd").append("<li>1</li>");
+    $("#xmxx_banner_bd").append("<li><a target='_blank' href='http://lucky.chinabidding.cn/'><img src='https://cdn.chinabidding.cn/public/static/images/570.jpg'/></a></li>");
+    $("#xmxx_banner_hd").append("<li>2</li>");
+    $("#xmxx_banner_bd").append("<li><a target='_blank' href='http://app.chinabidding.cn/'><img src='https://cdn.chinabidding.cn/public/static/images/czq.png'/></a></li>");
+    $("#xmxx_banner_hd").append("<li>3</li>");
+    $("#xmxx_banner_bd").append("<li><a target='_blank' href='/public/static/qypj/index.html'><img src='https://cdn.chinabidding.cn/public/static/images/zxpj.jpg'/></a></li>");
+    */
+    if (d < new Date("2017/1/29"))
+        $("#xmxx_adv_1").html("<a href='http://23a2124918.atobo.com.cn/WebSite/23a2124918-c13.html' title='山西金鹤电力设计有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/atobo.jpg'/></a>");
+    if (d < new Date("2017/1/30"))
+        $("#xmxx_adv_2").html("<a href='http://www.jzepe.com/' title='河南九州环保工程有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/jzepe.jpg'/></a>");
+    if (d < new Date("2017/1/30"))
+        $("#xmxx_adv_3").html("<a href='http://www.sdlnky.com/' title='莱芜鲁能开源集团电器有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/sdlnky.jpg'/></a>");
+    if (d < new Date("2017/2/12"))
+        $("#xmxx_adv_4").html("<a href='http://cn-site.tadirantele.com/ch/' title='昆明塔迪兰电信设备有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/tadirantele.jpg'/></a>");
+    if (d < new Date("2017/2/12"))
+        $("#xmxx_adv_5").html("<a href='http://sclljt.com/' title='四川蓝灵交通设施工程有限责任公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/sclljt.jpg'/></a>");
+    if (d < new Date("2017/1/30"))
+        $("#xmxx_adv_6").html("<a href='http://www.sinyowx.com/' title='无锡先优包装材料有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/sinyowx.jpg'/></a>");
+    if (d < new Date("2017/1/30"))
+        $("#xmxx_adv_7").html("<a href='http://www.kbdct.com/' title='深圳市康必达控制技术有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/kbdct.jpg'/></a>");
+    if (d < new Date("2017/1/30"))
+        $("#xmxx_adv_8").html("<a href='http://www.kxload.com/' title='河北凯翔电气科技股份有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/kxload.jpg'/></a>");
+    if (d < new Date("2017/1/30"))
+        $("#xmxx_adv_9").html("<a href='http://www.bjdhgroup.com/' title='北京鼎瀚航空设备有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/bjdhgroup.jpg'/></a>");
+    if (d < new Date("2017/1/30"))
+        $("#xmxx_adv_10").html("<a href='http://dealer.autohome.com.cn/5664/' title='广西水功汽车销售服务有限公司' target='_blank'><img width='195' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/dealer.jpg'/></a>");
+
+    //项目信息 - 研究报告
+    //$("#yjbg_adv_1").html("<a href='http://fxb.chinabidding.cn/?hmsr=%E9%87%87%E6%8B%9B%E7%BD%91%E5%B9%BF%E5%91%8A%E4%BD%8D&hmpl=&hmcu=&hmkw=&hmci=#/' target='_blank'><img width='185' height='100' src='https://cdn.chinabidding.cn/public/static/images/feed_yjbg.jpg'/></a>");
+    $("#yjbg_adv_1").html("<a href='http://fxb.chinabidding.cn/html/rate.jsp' target='_blank'><img width='185' height='100' src='https://cdn.chinabidding.cn/public/static/images/feed_yjbg.jpg'/></a>");
+    $("#yjbg_adv_2").html("<a href='http://fxb.chinabidding.cn/html/rate.jsp' target='_blank'><img width='185' height='100' src='https://cdn.chinabidding.cn/public/cblcn/cgxx/images/yj_t_15_1.jpg'/></a>");
+    if (d < new Date("2017/2/12"))
+        $("#yjbg_adv_3").html("<a href='http://www.rochem.cn/' title='天津市尚拓环保科技有限公司' target='_blank'><img width='185' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/rochem.jpg'/></a>");
+    if (d < new Date("2017/2/12"))
+        $("#yjbg_adv_4").html("<a href='http://www.ycttdl.com/' title='北京英昌通泰电力设备有限公司 ' target='_blank'><img width='185' height='100' src='https://cdn.chinabidding.cn/public/static/images/adver/ycttdl.jpg'/></a>");
+
+    //信息详情
+    //$("#info_adv_1").html("<a href='javascript:;'><img src='https://cdn.chinabidding.cn/public/cblcn/infoshow/images/img_xq/guang_1_11.jpg'/></a>");
+    //$("#info_adv_1").html("<a target='_blank' href='/cblcn/jfzx/fxb2016'><img src='https://cdn.chinabidding.cn/public/static/images/feed_info.jpg'/></a>");
+    //$("#info_adv_1_hd").append("<li></li>");
+    //$("#info_adv_1_bd").append("<li><a target='_blank' href='http://fxb.chinabidding.cn/?hmsr=%E9%87%87%E6%8B%9B%E7%BD%91%E5%B9%BF%E5%91%8A%E4%BD%8D&hmpl=&hmcu=&hmkw=&hmci=#/'><img src='https://cdn.chinabidding.cn/public/static/images/feed_info.jpg'/></a></li>");
+    $("#info_adv_1_bd").append("<li><a target='_blank' href='http://fxb.chinabidding.cn/html/rate.jsp'><img src='https://cdn.chinabidding.cn/public/static/images/feed_info.jpg'/></a></li>");
+    //$("#info_adv_1_hd").append("<li></li>");
+    $("#info_adv_1_bd").append("<li><a target='_blank' href='/cblcn/biddingdoc/promote'><img src='https://cdn.chinabidding.cn/public/static/images/info_adv_1_1705.jpg'/></a></li>");
+
+    $("#info_adv_2").html("<a target='_blank' href='/cblcn/jfzx/fxb2016'><img src='https://cdn.chinabidding.cn/public/static/images/fxb305.jpg'/></a>");
+
+    //$("#info_banner_hd").append("<li>●</li>");
+    $("#info_banner_bd").append("<li><a target='_blank' href='/cblcn/biddingdoc/promote'><img src='https://cdn.chinabidding.cn/public/static/images/info_adv_banner_1705.jpg'/></a></li>");
+    //$("#info_banner_hd").append("<li>●</li>");
+    $("#info_banner_bd").append("<li><a target='_blank' href='/cblcn/jfzx/fxb2016'><img src='https://cdn.chinabidding.cn/public/static/images/info_pj.jpg'/></a></li>");
+    //$("#info_banner_hd").append("<li>●</li>");
+    $("#info_banner_bd").append("<li><a target='_blank' href='https://www.bid360.com.cn/bidding/index.jsp'><img src='https://cdn.chinabidding.cn/public/cblcn/images/dashuju/xqy_r.jpg'/></a></li>");
+
+    //新版理事中心
+    $("#agency_adv_1").html("<a target='_blank' href='http://fxb.chinabidding.cn/?hmsr=%E9%87%87%E6%8B%9B%E7%BD%91%E5%B9%BF%E5%91%8A%E4%BD%8D&hmpl=&hmcu=&hmkw=&hmci=' ><img src='https://cdn.chinabidding.cn/public/cblcn/AgencyCenter/images/zt_guangg_11.jpg' /></a>");
+
+    //登录
+    $("#login_adv_1").html("<a href='http://cn.mikecrm.com/6sotf14' target='_blank' rel='nofollow'><img src='https://cdn.chinabidding.cn/public/static/images/adver/surver_580.jpg' style='margin-top:10px;'/></a>");
+    $("#login_adv_2").html("<a href='/public/static/dxbs/' target='_blank'><img src='https://cdn.chinabidding.cn/public/static/images/login_adv_2_1806.jpg'/></a>");
+
+    jQuery(".TB-focus").slide({mainCell: ".bd ul", effect: "fold", autoPlay: true, delayTime: 500});
+
+});
