@@ -16,6 +16,11 @@ public interface CategorysMapper {
             @Param("parentId") String parentId,@Param("type") String type);
 
 
+    public boolean addCategory(
+            @Param("name") String name,@Param("parentId") String parentId,@Param("type") String type);
 
+
+    public boolean updateCategory(
+            @Param("name") String name,@Param("id") String id);
 
 }

@@ -27,11 +27,6 @@
 
 
 
-
-
-
-
-
         <div class="x-nav">
             <span class="layui-breadcrumb">
               <a><cite>11</cite></a>
@@ -53,7 +48,7 @@
                     <label class="layui-form-label" style="width:100px">所属分类</label>
 
                       <div class="layui-input-inline" style="width:120px;text-align: left">
-                          <select name="categoryType" id="categoryType" lay-filter="categoryType">
+                          <select name="categoryType" id="categoryType" lay-filter="categoryType" lay-search>
                               <option value='fen'>项目分类</option>
                               <option value='huiyuan'>会员分权</option>
                               <option value='zhiwei'>职位分类</option>
@@ -64,24 +59,24 @@
 
 
                     <div class="layui-input-inline" style="width:120px;text-align: left">
-                        <select name="firstCategory" id="firstCategory" lay-filter="firstCategory">
-                             <option value=-2>全部</option>
+                        <select name="firstCategory" id="firstCategory" lay-filter="firstCategory" lay-search>
+                             <option value=-10>全部</option>
                         </select>
                     </div>
 
                       <div class="layui-input-inline" style="width:120px;text-align: left">
-                          <select name="twoCategory" id="twoCategory" lay-filter="twoCategory">
-                              <option value=-2>全部</option>
+                          <select name="twoCategory" id="twoCategory" lay-filter="twoCategory" lay-search>
+                              <option value=100>全部</option>
                           </select>
                       </div>
                       <div class="layui-input-inline" style="width:120px;text-align: left">
-                          <select name="twoCategory" id="threeCategory" lay-filter="threeCategory">
-                              <option value=-2>全部</option>
+                          <select name="threeCategory" id="threeCategory" lay-filter="threeCategory">
+                              <option value="-10">全部</option>
                           </select>
                       </div>
 
                     <div class="layui-input-inline" style="width:120px">
-                        <input type="text" name="name"  placeholder="分类名" autocomplete="off" class="layui-input">
+                        <input type="text" name="name"  placeholder="分类名" lay-verify="required" lay-verType="tips" class="layui-input">
                     </div>
                     <div class="layui-input-inline" style="width:80px">
                         <button class="layui-btn"  lay-submit="" lay-filter="add">
@@ -103,7 +98,6 @@
                     <i class="layui-icon">&#xe640;</i>
                     批量删除
                 </button>
-                <span class="x-right" style="line-height:40px">共有数据：88 条</span>
             </xblock>
 
 
@@ -169,7 +163,6 @@
 
 
 
-
         <script>
             layui.use(['element','layer','form','table'], function(){
                 var element = layui.element;
@@ -179,13 +172,15 @@
 
                 //进入页面默认显示项目分类，在数据库里类型列值为fen
                 var typeValue = 'fen';
+                var firstCategory = "";
+                var twoCategory = "";
 
 
 
                 /*js代码区域----------------------------------------------------------------*/
 
                 //先初始化一级分类
-                firstCategoryInit(0);
+                categoryType(0,typeValue);
 
 
                 //点击分类重载一级分类
@@ -203,9 +198,11 @@
                     var categorys = calldata.data;
 
                     $("#firstCategory").children().remove();
-                    $("#firstCategory").append("<option value=-2>全部</option>")
+                    $("#firstCategory").append("<option value=-10>全部</option>")
+                    firstCategory = "";
                     $("#twoCategory").children().remove();
-                    $("#twoCategory").append("<option value=-2>全部</option>")
+                    $("#twoCategory").append("<option value=-10>全部</option>")
+                    twoCategory = "";
 
                     for (var i = 0; i <categorys.length ; i++) {
                         $("#firstCategory").append("<option value=" + categorys[i].id + ">"+categorys[i].value+"</option>")
@@ -213,27 +210,6 @@
                     form.render();
                 }
 
-
-                //初始化一级分类方法
-                function firstCategoryInit(parentId){
-                    $.ajax({
-                        "url" : "category",
-                        "type" : "GET",
-                        "dataType":"json",
-                        "data" : "parentId="+parentId,
-                        "success" : firstCategoryInitCallBack
-                    })
-                }
-                //初始化一级分类成功后回调函数
-                function firstCategoryInitCallBack(calldata) {
-                    var categorys = calldata.data;
-                    $("#firstCategory").children().remove();
-                    $("#firstCategory").append("<option value=-2>全部</option>")
-                    for (var i = 0; i <categorys.length ; i++) {
-                        $("#firstCategory").append("<option value=" + categorys[i].id + ">"+categorys[i].value+"</option>")
-                    }
-                    form.render();
-                }
 
 
 
@@ -252,14 +228,22 @@
                 function twoCategoryInitCallBack(calldata) {
                     var categorys = calldata.data;
                     $("#twoCategory").children().remove();
-                    $("#twoCategory").append("<option value=-2>全部</option>")
+                    //查到数据就显示parentid一点全部下面就显示parentid为
+                    //查不到的话（那就是一级分类也是请选择显示的为当前分类所有parent0的数据）那就是-10，直接就不执行任何即可，
+                   if(categorys[0] != null){
+                        $("#twoCategory").append("<option value="+categorys[0].parentId+">全部</option>")
+                       twoCategory = "";
+                    }else{
+                        $("#twoCategory").append("<option value=-10>全部</option>")
+                       twoCategory = "";
+                    }
                     for (var i = 0; i <categorys.length ; i++) {
                         $("#twoCategory").append("<option value=" + categorys[i].id + ">"+categorys[i].value+"</option>")
                     }
                     form.render();
                 }
 
-                //初始化三级分类方法
+                /*//初始化三级分类方法
                 function threeCategoryInit(parentId){
                     $.ajax({
                         "url" : "category",
@@ -274,14 +258,33 @@
                 function threeCategoryInitCallBack(calldata) {
                     var categorys = calldata.data;
                     $("#threeCategory").children().remove();
-                    $("#threeCategory").append("<option value=-2>全部</option>")
+                    $("#threeCategory").append("<option value=-10>全部</option>")
                     for (var i = 0; i <categorys.length ; i++) {
                         $("#threeCategory").append("<option value=" + categorys[i].id + ">"+categorys[i].value+"</option>")
                     }
                     form.render();
+                }*/
+                function addCategory(name,parentId,type){
+                    $.ajax({
+                        "url" : "addCategory"
+                        ,"data" : {"name":name,"parentId":parentId,"type":type}
+                        ,"dataType" : "json"
+                        ,"success" : function (data) {
+                            alert(data)
+                        }
+                    })
                 }
 
-
+                function updateCategory(name,id){
+                    $.ajax({
+                        "url" : "updateCategory"
+                        ,"data" : {"name":name,"id":id}
+                        ,"dataType" : "json"
+                        ,"success" : function (data) {
+                            alert(data)
+                        }
+                    })
+                }
 
 
 
@@ -309,9 +312,10 @@
 
                 /*layui区域---------------------------------------------------------------------------*/
 
+                //分类切换会显示该分类父级id为0的数据
                 form.on('select(categoryType)', function(data){
                     alert(data.value);         //得到被选中的值
-                    type = data.value;
+                    typeValue = data.value;
                     categoryType(0,data.value);
                     table.reload('table', {
                         url: 'category'
@@ -323,11 +327,24 @@
                 });
 
 
+                //如果为-10就查该分类的全部父级0的，下拉那就啥也查不到因为是-10
                 form.on('select(firstCategory)', function(data){
-                    alert(data.value); //得到被选中的值
-                    twoCategoryInit(data.value);
+                    if($(data.othis).find(".layui-unselect").val()=="全部"){
+                        alert("quanbu")
+                        firstCategory = "";
+                    }else{
+                        alert("asd")
+                        firstCategory = "1";
+                    }
+                    var dataValue = data.value;
+                    alert(dataValue)
+                    twoCategoryInit(dataValue);
+                    if(dataValue == -10){
+                        dataValue = 0;
+                    }
                     table.reload('table', {
-                        url: 'category?parentId='+data.value
+                        url: 'category?parentId='+dataValue
+                        ,where: {parentId:dataValue,type:typeValue }
                         ,page: {
                             curr: 1 //重新从第 1 页开始
                         }
@@ -335,14 +352,21 @@
                 });
 
                 form.on('select(twoCategory)', function(data){
-                    alert(data.value); //得到被选中的值
-                    threeCategoryInit(data.value);
-                    table.reload('table', {
-                        url: 'category?parentId='+data.value
-                        ,page: {
-                            curr: 1 //重新从第 1 页开始
-                        }
-                    });
+                    if($(data.othis).find(".layui-unselect").val()=="全部"){
+                       twoCategory = "";
+                    }else{
+                        twoCategory = "1";
+                    }
+                    var dataValue = data.value;
+                    if(dataValue != -10){
+                      /*  threeCategoryInit(dataValue);*/
+                        table.reload('table', {
+                            url: 'category?parentId='+dataValue
+                            ,page: {
+                                curr: 1 //重新从第 1 页开始
+                            }
+                        });
+                    }
                 });
 
 
@@ -353,10 +377,13 @@
                     ,page: true        //开启分页
                     ,cols: [[          //表头
                          {field: 'id', title: 'ID'}
-                        ,{field: 'value', title: '值' }
+                        ,{field: 'value', title: '值',edit:true }
                         ,{field: 'parentId', title: '父级id'}
                         ,{field: 'parentname', title: '父级名字',templet: '#parentName' }
+                        ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
                     ]]
+                    ,limit : 2
+                    ,limits: [2,5,10]
 
                 });
 
@@ -367,57 +394,74 @@
 
                 //监听提交
               form.on('submit(add)', function(data){
-                console.log(data);
-                //发异步，把数据提交给php
-                layer.alert("增加成功", {icon: 6});
-                $('#x-link').prepend('<tr><td><input type="checkbox"value="1"name=""></td><td>1</td><td>1</td><td>'+data.field.name+'</td><td class="td-manage"><a title="编辑"href="javascript:;"onclick="cate_edit(\'编辑\',\'cate-edit.html\',\'4\',\'\',\'510\')"class="ml-5"style="text-decoration:none"><i class="layui-icon">&#xe642;</i></a><a title="删除"href="javascript:;"onclick="cate_del(this,\'1\')"style="text-decoration:none"><i class="layui-icon">&#xe640;</i></a></td></tr>');
+                var data =  data.field;
+                var parentId;
+                if(twoCategory != ""){
+                    parentId = data.twoCategory;
+                }else if(firstCategory != ""){
+                    parentId = data.firstCategory;
+                }else{
+                    parentId = "0"
+                }
+                  addCategory(data.name,parentId,typeValue);
+                  table.reload('table', {
+                      url: 'category'
+                      ,where: {parentId:parentId,type:typeValue }
+                      ,page: {
+                          curr: 1 //重新从第 1 页开始
+                      }
+                  })
                 return false;
               });
+
+
+
+                table.on('tool(firstTable)', function(obj){
+                    var data = obj.data;
+                    //console.log(obj)
+                    if(obj.event === 'del'){
+                        layer.confirm('真的删除行么', function(index){
+                            obj.del();
+                            layer.close(index);
+                        });
+                    } else if(obj.event === 'edit'){
+                        layer.prompt({
+                            formType: 2
+                            ,value: data.email
+                        }, function(value, index){
+                            obj.update({
+                                email: value
+                            });
+                            layer.close(index);
+                        });
+                    }
+                })
+
+
+
+                table.on('edit(firstTable)', function(obj){ //注：edit是固定事件名，test是table原始容器的属性 lay-filter="对应的值"
+                    updateCategory(obj.value,obj.data.id);
+                });
+
 
 
             })
 
 
-
-
-
-
-
-
-
-
-              
-            //批量删除提交
-             function delAll () {
-                layer.confirm('确认要删除吗？',function(index){
-                    //捉到所有被选中的，发异步进行删除
-                    layer.msg('删除成功', {icon: 1});
-                });
-             }
-
-             //-编辑
-            function cate_edit (title,url,id,w,h) {
-                x_admin_show(title,url,w,h); 
-            }
-           
-            /*-删除*/
-            function cate_del(obj,id){
-                layer.confirm('确认要删除吗？',function(index){
-                    //发异步删除数据
-                    $(obj).parents("tr").remove();
-                    layer.msg('已删除!',{icon:1,time:1000});
-                });
-            }
-            </script>
+        </script>
 
         <script type="text/html" id="parentName">
             {{#  if(d.parentname == null){ }}
             无父级
             {{#  } else { }}
-              {{d.parentname}}
+            {{d.parentname}}
             {{#  } }}
         </script>
 
+        <script type="text/html" id="barDemo">
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        </script>
 
 
 
@@ -448,6 +492,7 @@
           s.parentNode.insertBefore(hm, s);
         })();
         </script>
+
 
 
     </body>
