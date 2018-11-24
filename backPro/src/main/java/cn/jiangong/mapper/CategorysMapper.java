@@ -12,15 +12,17 @@ public interface CategorysMapper {
      * @param parentId
      * @return Categorys类型 List
      */
-    public List<Categorys> parentIdSelectCategorysList(
+     List<Categorys> parentIdSelectCategorysList(
             @Param("parentId") String parentId,@Param("type") String type);
 
 
-    public boolean addCategory(
+     boolean addCategory(
             @Param("name") String name,@Param("parentId") String parentId,@Param("type") String type);
 
 
-    public boolean updateCategory(
+     boolean updateCategory(
             @Param("name") String name,@Param("id") String id);
+
+     boolean deleteCategory(String id);
 
 }

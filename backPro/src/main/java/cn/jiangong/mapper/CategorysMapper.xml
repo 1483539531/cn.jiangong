@@ -12,6 +12,10 @@
         update categorys set value = #{name} where id = #{id}
     </update>
 
+    <delete id="deleteCategory">
+        delete from categorys where id = #{id}
+    </delete>
+
     <select id="parentIdSelectCategorysList" resultType="Categorys">
         SELECT id,VALUE,parent_id,
         (SELECT VALUE FROM categorys WHERE id = c.`parent_id`) parentname

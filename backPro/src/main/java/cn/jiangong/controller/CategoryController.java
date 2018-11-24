@@ -35,7 +35,6 @@ public class CategoryController {
         hashMap.put("msg","");
         hashMap.put("count",categorysPageInfo.getTotal());
         hashMap.put("data",categorysPageInfo.getList());
-        System.out.println(categorysPageInfo.getList());
         return JSON.toJSONString(hashMap);
     }
 
@@ -55,6 +54,13 @@ public class CategoryController {
     @RequestMapping("updateCategory")
     public Object updateCategory(String name,String id){
         boolean result = categorysService.updateCategory(name,id);
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping("deleteCategory")
+    public Object deleteCategory(String id){
+        boolean result = categorysService.deleteCategory(id);
         return result;
     }
 

@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
     
@@ -51,7 +52,7 @@
                 </div>
                 <div class="layui-form-item">
                     <label for="L_city" class="layui-form-label">
-                        城市
+                        ${param.id}
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="L_city" name="city" autocomplete="off" value="广州"

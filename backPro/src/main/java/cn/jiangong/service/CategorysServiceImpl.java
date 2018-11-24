@@ -36,4 +36,13 @@ public class CategorysServiceImpl {
         return categorysMapper.updateCategory(name,id);
     }
 
+    public boolean deleteCategory(String id){
+        List<Categorys> categorys = categorysMapper.parentIdSelectCategorysList(id, null);
+        if (!categorys.isEmpty()){
+            System.out.println("有子类");
+            return false;
+        }
+        return categorysMapper.deleteCategory(id);
+    }
+
 }

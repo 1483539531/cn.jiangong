@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
         <meta charset="utf-8">
@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="layui/css/layui.css">
         <script src="layui/layui.js"></script>
         <script src="js/jquery-1.12.4.js"></script>
+        <script src="js/x-layui.js" charset="utf-8"></script>
         <style>
             .x-body{
                 padding: 20px;
@@ -40,7 +41,7 @@
         <div class="x-body">
 
 
-            <form class="layui-form x-center"   action="" style="width:50%;margin: 0px auto" >
+            <form class="layui-form x-center"   action="" style="width:50%;margin: 0px auto;position: relative;right: 40px;" >
                 <div class="layui-form-pane" style="margin-top: 15px;">
                   <div class="layui-form-item" style="width:1000px">
 
@@ -69,11 +70,7 @@
                               <option value=100>全部</option>
                           </select>
                       </div>
-                      <div class="layui-input-inline" style="width:120px;text-align: left">
-                          <select name="threeCategory" id="threeCategory" lay-filter="threeCategory">
-                              <option value="-10">全部</option>
-                          </select>
-                      </div>
+
 
                     <div class="layui-input-inline" style="width:120px">
                         <input type="text" name="name"  placeholder="分类名" lay-verify="required" lay-verType="tips" class="layui-input">
@@ -99,7 +96,6 @@
                     批量删除
                 </button>
             </xblock>
-
 
             <%--<table class="layui-table">
 
@@ -243,27 +239,7 @@
                     form.render();
                 }
 
-                /*//初始化三级分类方法
-                function threeCategoryInit(parentId){
-                    $.ajax({
-                        "url" : "category",
-                        "type" : "GET",
-                        "dataType":"json",
-                        "data" : "parentId="+parentId,
-                        "success" : threeCategoryInitCallBack
-                    })
-                }
 
-                //初始化三级分类成功后回调函数
-                function threeCategoryInitCallBack(calldata) {
-                    var categorys = calldata.data;
-                    $("#threeCategory").children().remove();
-                    $("#threeCategory").append("<option value=-10>全部</option>")
-                    for (var i = 0; i <categorys.length ; i++) {
-                        $("#threeCategory").append("<option value=" + categorys[i].id + ">"+categorys[i].value+"</option>")
-                    }
-                    form.render();
-                }*/
                 function addCategory(name,parentId,type){
                     $.ajax({
                         "url" : "addCategory"
@@ -286,24 +262,19 @@
                     })
                 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                function deleteCategory(id){
+                    var flag;
+                    $.ajax({
+                        "url" : "deleteCategory"
+                        ,"data" : {"id":id}
+                        ,"dataType" : "json"
+                        ,async:false
+                        ,"success" : function (data) {
+                            flag = data;
+                        }
+                    })
+                    return flag;
+                }
 
 
 
@@ -314,7 +285,6 @@
 
                 //分类切换会显示该分类父级id为0的数据
                 form.on('select(categoryType)', function(data){
-                    alert(data.value);         //得到被选中的值
                     typeValue = data.value;
                     categoryType(0,data.value);
                     table.reload('table', {
@@ -330,14 +300,11 @@
                 //如果为-10就查该分类的全部父级0的，下拉那就啥也查不到因为是-10
                 form.on('select(firstCategory)', function(data){
                     if($(data.othis).find(".layui-unselect").val()=="全部"){
-                        alert("quanbu")
                         firstCategory = "";
                     }else{
-                        alert("asd")
                         firstCategory = "1";
                     }
                     var dataValue = data.value;
-                    alert(dataValue)
                     twoCategoryInit(dataValue);
                     if(dataValue == -10){
                         dataValue = 0;
@@ -359,7 +326,6 @@
                     }
                     var dataValue = data.value;
                     if(dataValue != -10){
-                      /*  threeCategoryInit(dataValue);*/
                         table.reload('table', {
                             url: 'category?parentId='+dataValue
                             ,page: {
@@ -418,23 +384,23 @@
 
                 table.on('tool(firstTable)', function(obj){
                     var data = obj.data;
-                    //console.log(obj)
                     if(obj.event === 'del'){
-                        layer.confirm('真的删除行么', function(index){
-                            obj.del();
-                            layer.close(index);
-                        });
-                    } else if(obj.event === 'edit'){
-                        layer.prompt({
-                            formType: 2
-                            ,value: data.email
-                        }, function(value, index){
-                            obj.update({
-                                email: value
-                            });
+                        layer.confirm('真的删除行么', {
+                            skin: 'layui-layer-molv' //样式类名
+                            ,closeBtn: 0
+                        }, function(index){
+                           if(!deleteCategory(data.id)){
+                                layer.alert('有子元素不能删除', {
+                                    skin: 'layui-layer-molv' //样式类名
+                                    ,closeBtn: 0
+                                });
+                            }else{
+                                obj.del();
+                            }
                             layer.close(index);
                         });
                     }
+
                 })
 
 
@@ -459,7 +425,6 @@
         </script>
 
         <script type="text/html" id="barDemo">
-            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
         </script>
 
@@ -483,7 +448,7 @@
 
 
 
-            <script>
+        <script>
         var _hmt = _hmt || [];
         (function() {
           var hm = document.createElement("script");
