@@ -6,8 +6,8 @@
             X-admin v1.0
         </title>
         <link rel="stylesheet" href="layui/css/layui.css">
-        <script src="layui/layui.js"></script>
         <script src="js/jquery-1.12.4.js"></script>
+        <script src="layui/layui.js"></script>
         <script src="js/x-layui.js" charset="utf-8"></script>
         <style>
             .x-body{
@@ -97,64 +97,8 @@
                 </button>
             </xblock>
 
-            <%--<table class="layui-table">
-
-                &lt;%&ndash;id  分类名  所属父级  操作&ndash;%&gt;
-                <thead>
-                    <tr>
-                        <th>
-                            <input type="checkbox" name="" value="">
-                        </th>
-                        <th>ID</th>
-                        <th>分类名</th>
-                        <th>所属父级</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-
-                <tbody id="x-link">
-
-
-                    &lt;%&ndash;需要循环的地方&ndash;%&gt;
-                    <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="">
-                        </td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>新闻</td>
-
-                        &lt;%&ndash;编辑和删除&ndash;%&gt;
-                        <td class="td-manage">
-
-                            <a title="编辑" href="javascript:;" onclick="cate_edit('编辑','cate-edit.html','4','','510')"
-                            class="ml-5" style="text-decoration:none">
-                                <i class="layui-icon">&#xe642;</i>
-                            </a>
-
-                            <a title="删除" href="javascript:;" onclick="cate_del(this,'1')" 
-                            style="text-decoration:none">
-                                <i class="layui-icon">&#xe640;</i>
-                            </a>
-                        </td>
-
-                    </tr>
-
-
-
-                </tbody>
-
-
-
-
-
-
-            </table>--%>
-
             <table id="firstTable" lay-filter="firstTable"></table>
 
-
-        </div>
 
 
 
@@ -350,7 +294,6 @@
                     ]]
                     ,limit : 2
                     ,limits: [2,5,10]
-
                 });
 
 
@@ -453,7 +396,7 @@
         (function() {
           var hm = document.createElement("script");
           hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0]; 
+          var s = document.getElementsByTagName("script")[0];
           s.parentNode.insertBefore(hm, s);
         })();
         </script>

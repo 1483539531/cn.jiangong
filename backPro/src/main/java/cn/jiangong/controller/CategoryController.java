@@ -20,6 +20,10 @@ public class CategoryController {
     @Autowired
     CategorysServiceImpl categorysService;
 
+    @RequestMapping("categoryPage")
+    public String categoryPage(){
+        return "category";
+    }
 
 
     @ResponseBody

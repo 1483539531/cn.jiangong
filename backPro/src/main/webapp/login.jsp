@@ -84,11 +84,7 @@
                 form.on('submit(save)',
                 function(data) {
                     console.log(data);
-                    layer.alert(JSON.stringify(data.field), {
-                      title: '最终的提交信息'
-                    },function  () {
-                        location.href = "login?zhanghao=ads&password=as";
-                    })
+                    location.href = "login?zhanghao="+data.field.username+"&password="+data.field.pass;
                     return false;
                 });
 

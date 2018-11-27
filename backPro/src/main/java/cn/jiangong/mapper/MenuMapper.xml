@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cn.jiangong.mapper.MenuMapper">
+
+
+    <insert id="insertMenu">
+            insert into menu (name,parent_id,level) values(#{name},#{parentId},2)
+    </insert>
+
+
+    <select id="selectOptionMenuList" resultType="Menu">
+          select id,name from menu where parent_id = #{parentId}
+    </select>
+
+    <select id="selectListMenuList" resultType="Menu">
+          select * from menu where parent_id = #{parentId}
+    </select>
+
+</mapper>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
-    
+<html lang="zh‐cmn"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <title>
@@ -76,7 +77,7 @@
                         autocomplete="off" class="layui-input" value="123456">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
-                        6到16个字符
+                        6到16个字符<span th:text="${id}"></span>
                     </div>
                 </div>
                 <div class="layui-form-item">

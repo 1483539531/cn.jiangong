@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -12,7 +13,7 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="./css/x-admin.css" media="all">
+        <link rel="stylesheet" href="css/x-admin.css" media="all">
     </head>
     <body>
 
@@ -42,7 +43,7 @@
             <div class="layui-header header header-demo">
                 <div class="layui-main">
 
-                    <a class="logo" href="./index.jsp">凯凯建设网</a>
+                    <a class="logo" href="index.jsp">凯凯建设网</a>
 
                     <ul class="layui-nav" lay-filter="">
                         <!--logo图片-->
@@ -224,7 +225,7 @@
                             <dl class="layui-nav-child">
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="category.jsp">
+                                    <a href="javascript:;" _href="categoryPage">
                                         <cite>分类列表</cite>
                                     </a>
                                 </dd>
@@ -330,7 +331,7 @@
                             <dl class="layui-nav-child">
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./admin-list.html">
+                                    <a href="javascript:;" _href="./admin-list.jsp">
                                         <cite>管理员列表</cite>
                                     </a>
                                 </dd>
