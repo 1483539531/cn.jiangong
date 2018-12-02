@@ -10,6 +10,7 @@ public class BackUser {
   private String password;
   private int state;
   private Date logindate;
+  private String roleId;
 
 
 

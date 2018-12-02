@@ -12,28 +12,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.List;
 
 @Controller
+@RequestMapping("category")
 public class CategoryController {
 
     @Autowired
     CategorysServiceImpl categorysService;
 
-    @RequestMapping("categoryPage")
-    public String categoryPage(){
-        return "category";
-    }
+
 
 
     @ResponseBody
-    @RequestMapping("category")
-    public Object category(String parentId,String type, HttpServletRequest request,Integer page,Integer limit){
+    @RequestMapping("/SelectCategorysList")
+    public Object SelectCategorysList(String parentId,String type, HttpServletRequest request,Integer page,Integer limit){
         if(page == null){
             page = 1;
             limit = 1000;
         }
-        PageInfo<Categorys> categorysPageInfo = categorysService.parentIdSelectCategorysList(parentId, type,page,limit);
+        PageInfo<Categorys> categorysPageInfo = categorysService.SelectCategorysList(parentId, type,page,limit);
         HashMap<String,Object> hashMap = new  HashMap<String,Object>();
         hashMap.put("code",0);
         hashMap.put("msg","");
@@ -67,6 +64,8 @@ public class CategoryController {
         boolean result = categorysService.deleteCategory(id);
         return result;
     }
+
+
 
 
 }

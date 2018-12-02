@@ -16,14 +16,10 @@ public class CategorysServiceImpl {
     @Autowired
     CategorysMapper categorysMapper;
 
-    /**
-     * 根据父级id查询出所属的所有分类信息
-     * @param parentId
-     * @return Categorys类型 List
-     */
-    public PageInfo<Categorys> parentIdSelectCategorysList(String parentId,String type,Integer page,Integer pageSize){
+
+    public PageInfo<Categorys> SelectCategorysList(String parentId,String type,Integer page,Integer pageSize){
         PageHelper.startPage(page,pageSize);
-        List<Categorys> categorys = categorysMapper.parentIdSelectCategorysList(parentId, type);
+        List<Categorys> categorys = categorysMapper.SelectCategorysList(parentId, type);
         PageInfo<Categorys> dev_userPageInfo = new PageInfo<Categorys>(categorys);
         return dev_userPageInfo;
     }
@@ -37,7 +33,7 @@ public class CategorysServiceImpl {
     }
 
     public boolean deleteCategory(String id){
-        List<Categorys> categorys = categorysMapper.parentIdSelectCategorysList(id, null);
+        List<Categorys> categorys = categorysMapper.SelectCategorysList(id, null);
         if (!categorys.isEmpty()){
             System.out.println("有子类");
             return false;

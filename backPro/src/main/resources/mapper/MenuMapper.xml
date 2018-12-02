@@ -11,12 +11,17 @@
     </insert>
 
 
-    <select id="selectOptionMenuList" resultType="Menu">
+    <select id="selectFewMenuList" resultType="Menu">
           select id,name from menu where parent_id = #{parentId}
     </select>
 
-    <select id="selectListMenuList" resultType="Menu">
+    <select id="selectManyMenuList" resultType="Menu">
           select * from menu where parent_id = #{parentId}
+    </select>
+
+    <select id="roleSelectMenuList" resultType="Menu">
+        SELECT * FROM menu
+        WHERE id IN(SELECT menu_id FROM role_menu WHERE role_id = #{roleId}) AND parent_id = #{parentId}
     </select>
 
 </mapper>

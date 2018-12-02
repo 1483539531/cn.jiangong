@@ -7,12 +7,8 @@ import java.util.List;
 
 public interface CategorysMapper {
 
-    /**
-     * 根据父级id查询出所属的所有分类信息
-     * @param parentId
-     * @return Categorys类型 List
-     */
-     List<Categorys> parentIdSelectCategorysList(
+
+     List<Categorys> SelectCategorysList(
             @Param("parentId") String parentId,@Param("type") String type);
 
 

@@ -1,17 +1,15 @@
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <title>
             X-admin v1.0
         </title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="css/x-admin.css" media="all">
+        <script src="js/jquery-1.12.4.js"></script>
+        <link rel="stylesheet" href="layui/css/layui.css">
+        <script src="layui/layui.js"></script>
+        <script src="js/x-admin.js"></script>
     </head>
     <body>
 
@@ -41,7 +39,7 @@
             <div class="layui-header header header-demo">
                 <div class="layui-main">
 
-                    <a class="logo" href="index.html">凯凯建设网</a>
+                    <a class="logo" href="index.ftl">建设网</a>
 
                     <ul class="layui-nav" lay-filter="">
                         <!--logo图片-->
@@ -91,7 +89,7 @@
 
 
                     <!--left-side栏-->
-                    <ul class="layui-nav layui-nav-tree site-demo-nav" lay-filter="side">
+                    <ul class="layui-nav layui-nav-tree site-demo-nav" id="side1" lay-filter="side">
 
 
 
@@ -329,13 +327,13 @@
                             <dl class="layui-nav-child">
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./admin-list.jsp">
+                                    <a href="javascript:;" _href="adminListPage">
                                         <cite>管理员列表</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./admin-role.html">
+                                    <a href="javascript:;" _href="adminRolePage">
                                         <cite>角色管理</cite>
                                     </a>
                                 </dd>
@@ -347,7 +345,7 @@
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./admin-rule.html">
+                                    <a href="javascript:;" _href="adminMenuPage">
                                         <cite>权限管理</cite>
                                     </a>
                                 </dd>
@@ -480,6 +478,26 @@
 
 
 
+                        <li class="layui-nav-item">
+
+                            <a class="javascript:;" href="javascript:;">
+                                <i class="layui-icon" style="top: 3px;">&#xe634;</i><cite>轮播管理</cite>
+                            </a>
+
+                            <dl class="layui-nav-child">
+
+                                <dd class="">
+                                    <a href="javascript:;" _href="./banner-list.html">
+                                        <cite>轮播列表</cite>
+                                    </a>
+                                </dd>
+
+                            </dl>
+
+                        </li>
+
+
+
                     </ul>
 
 
@@ -506,7 +524,7 @@
                 </ul>
                 <div class="layui-tab-content site-demo site-demo-body">
                     <div class="layui-tab-item layui-show">
-                        <iframe frameborder="0" src="./welcome.html" class="x-iframe"></iframe>
+                        <iframe frameborder="0" src="welcome.html" class="x-iframe"></iframe>
                     </div>
                 </div>
             </div>
@@ -516,32 +534,46 @@
 
 
 
-
-
-
-
-
-
-
-
-
-        <script src="./lib/layui/layui.js" charset="utf-8"></script>
-        <script src="./js/x-admin.js"></script>
-        <script>
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
-
-
-
-
-
-
-
     </body>
+
+
+
+<script>
+
+    layui.use(['laydate', 'element', 'laypage', 'layer', 'form', 'table','element '], function () {
+        var laydate = layui.laydate;//日期插件
+        var lement = layui.element;//面包导航
+        var laypage = layui.laypage;//分页
+        var layer = layui.layer;//弹出层
+        var form = layui.form;
+        var table = layui.table;
+        var element = layui.element;
+
+
+
+        selectEveryMenuList_id()
+    function selectEveryMenuList_id() {
+        $.ajax({
+            "url" : "adminMenu/selectEveryMenuList_id"
+            ,"dataType" : "json"
+            ,"success" : function (data) {
+                console.log(data)
+                var str = "";
+                for (var i = 0; i <data.length ; i++) {
+                    var childrenValue = data[i].children;
+                    str += "<li class=layui-nav-item><a class=\"javascript:;\" href=\"javascript:;\"> <i class=layui-icon style=top:3px;>&#xe634;</i><cite>"+data[i].name+"</cite> </a><dl class=layui-nav-child>"
+                    for (var j = 0; j < childrenValue.length ; j++) {
+                        str += " <dd> <a _href=./banner-list.html> <cite>"+childrenValue[j].name+"</cite> </a> </dd> "
+                    }
+                    str += "</dl></li>";
+                }
+                $("#side1").empty();
+                $("#side1").append(str)
+            }
+        })
+    }
+
+
+    })
+</script>
 </html>

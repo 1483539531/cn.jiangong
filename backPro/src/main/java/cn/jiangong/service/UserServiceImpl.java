@@ -3,11 +3,15 @@ package cn.jiangong.service;
 
 import cn.jiangong.entity.BackUser;
 import cn.jiangong.entity.Categorys;
+import cn.jiangong.entity.UserPrivilege;
 import cn.jiangong.mapper.UserMapper;
+import cn.jiangong.mapper.UserPrivilegeMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,16 +21,23 @@ public class UserServiceImpl {
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    UserPrivilegeMapper userPrivilegeMapper;
+
 
     public BackUser login(String zhanghao, String password){
             return userMapper.login(zhanghao,password);
     }
 
-    public PageInfo<BackUser> selectUserList(Integer page,Integer pageSize,String startdate,String enddate,String name){
+    public PageInfo<BackUser> selectBackUserList(Integer page,Integer pageSize,String startdate,String enddate,String name){
         PageHelper.startPage(page,pageSize);
-        List<BackUser> backUsers = userMapper.selectUserList(startdate,enddate,name);
+        List<BackUser> backUsers = userMapper.selectBackUserList(startdate,enddate,name);
         PageInfo<BackUser> backUserPageInfo = new PageInfo<BackUser>(backUsers);
         return backUserPageInfo;
+    }
+
+    public BackUser selectBackUser(Integer id){
+        return userMapper.selectBackUser(id);
     }
 
     public boolean updateBackUserState(String state,String id){
@@ -38,5 +49,21 @@ public class UserServiceImpl {
             }
             return userMapper.updateBackUserState(stateNumber,id);
     }
+
+    @Transactional
+    public boolean updateBackUser(String zhanghao, String password,Integer userId,Integer roleId){
+        userPrivilegeMapper.delete(userId);
+        if(userMapper.updateBackUser(zhanghao,password)
+                &&  userPrivilegeMapper.insert(userId, roleId)){
+            return true;
+        }
+        return false;
+    }
+
+    public BackUser selectRoleId(String id){
+        return userMapper.selectRoleId(id);
+    }
+
+
 
 }

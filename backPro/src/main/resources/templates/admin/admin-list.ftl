@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,14 +5,11 @@
     <title>
         X-admin v1.0
     </title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
+
+
+
+
     <script src="js/jquery-1.12.4.js"></script>
-    <script src="js/x-layui.js" charset="utf-8"></script>
     <link rel="stylesheet" href="layui/css/layui.css">
     <script src="layui/layui.js"></script>
     <style>
@@ -21,19 +17,18 @@
             padding: 20px;
         }
     </style>
+
 </head>
 <body>
 
-<!--    首页> 会员管理> 轮播列表    后面有个刷新页面图标    -->
+
 <div class="x-nav">
-                <span class="layui-breadcrumb">
-                  <a><cite>首页</cite></a>
-                  <a><cite>会员管理</cite></a>
-                  <a><cite>轮播列表</cite></a>
-                </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
-       href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon"
-                                                                        style="line-height:30px">ဂ</i></a>
+    <span class="layui-breadcrumb">
+        <a><cite>首页</cite></a>
+        <a><cite>会员管理</cite></a>
+        <a><cite>轮播列表</cite></a>
+    </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 
 
@@ -43,7 +38,7 @@
     <form class="layui-form x-center" action="" style="width:1000px;margin: 0px auto;position: relative;left: 60px;">
         <div class="layui-form-pane" style="margin-top: 15px;">
             <div class="layui-form-item">
-                
+
                 <label class="layui-form-label">日期范围</label>
                 <div class="layui-input-inline">
                     <input type="text" class="date layui-input" placeholder="开始日" name="startdate">
@@ -67,37 +62,15 @@
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
         <button class="layui-btn" onclick="admin_add('添加用户','admin-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加
         </button>
-    <%-- <table class="layui-table">
 
+    <#--   <a title="编辑" href="javascript:;" onclick="admin_edit('编辑','admin-edit.ftl','4','','510')"></a>
+-->
 
-
-                 <td class="td-status">
-                     <span class="layui-btn layui-btn-normal layui-btn-mini">
-                         已启用
-                     </span>
-                 </td>
-                 <td class="td-manage">
-                     <a style="text-decoration:none" onclick="admin_stop(this,'10001')" href="javascript:;" title="停用">
-                         <i class="layui-icon">&#xe601;</i>
-                     </a>
-                     <a title="编辑" href="javascript:;" onclick="admin_edit('编辑','admin-edit.html','4','','510')"
-                     class="ml-5" style="text-decoration:none">
-                         <i class="layui-icon">&#xe642;</i>
-                     </a>
-                     <a title="删除" href="javascript:;" onclick="admin_del(this,'1')"
-                     style="text-decoration:none">
-                         <i class="layui-icon">&#xe640;</i>
-                     </a>
-                 </td>
-             </tr>
-         </tbody>
-     </table>--%>
-
-
-    <table id="firstTable" lay-filter="firstTable"></table>
+        <table id="firstTable" lay-filter="firstTable"></table>
 
 
 </div>
+
 <script>
     layui.use(['laydate', 'element', 'laypage', 'layer', 'form', 'table'], function () {
         var laydate = layui.laydate;//日期插件
@@ -110,7 +83,7 @@
 
         function updateState(state,id){
             $.ajax({
-                "url" : "updateBackUserState"
+                "url" : "adminList/updateBackUserState"
                 ,"data" :{"state": state,"id":id}
                 ,"type" : "GET"
                 ,"dateType" : "json"
@@ -123,13 +96,10 @@
 
 
 
-
-
-
         table.render({
             elem: '#firstTable'
             ,id: 'table'
-            ,url: 'BackUserList'   //数据接口
+            ,url: 'adminList/selectBackUserList'   //数据接口
             ,page: true        //开启分页
             ,cols: [[          //表头
                 {field: 'id', title: 'ID',width: 250}
@@ -152,7 +122,7 @@
         form.on('submit(sreach)',function (data) {
             var dataValue = data.field;
             table.reload('table', {
-                url: 'BackUserList'
+                url: 'adminList/selectBackUserList'
                 ,where: {startdate:dataValue.startdate,enddate:dataValue.enddate,name:dataValue.username}
                 ,page: {
                     curr: 1 //重新从第 1 页开始
@@ -161,10 +131,39 @@
             return false;
         })
 
+
+
         form.on('switch(switchTest)', function(data){
             layer.msg('修改成功');
             updateState(data.elem.checked,data.value)
         });
+
+
+        table.on('tool(firstTable)',function (obj) {
+            var data = obj.data;
+
+            if(obj.event === 'del'){
+                layer.confirm('真的删除行么', {
+                    skin: 'layui-layer-molv' //样式类名
+                    ,closeBtn: 0
+                }, function(index){
+                    deleteMenu(data.id)
+                    obj.del();
+                    layer.close(index);
+                });
+            }else if(obj.event === 'edit'){
+                layer.open({
+                    type: 2,
+                    area: ['700px', '500px'],
+                    fixed: false, //不固定
+                    maxmin: true,
+                    content: 'adminEditPage?id='+data.id
+                });
+            }
+
+        })
+
+
 
 
 

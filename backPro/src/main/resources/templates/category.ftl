@@ -1,19 +1,22 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <title>
             X-admin v1.0
         </title>
+
+
         <link rel="stylesheet" href="layui/css/layui.css">
         <script src="js/jquery-1.12.4.js"></script>
         <script src="layui/layui.js"></script>
-        <script src="js/x-layui.js" charset="utf-8"></script>
         <style>
             .x-body{
                 padding: 20px;
             }
         </style>
+
+
     </head>
     <body>
 
@@ -126,7 +129,7 @@
                 //点击分类重载一级分类
                 function categoryType(parentId,type){
                     $.ajax({
-                        "url" : "category",
+                        "url" : "category/SelectCategorysList",
                         "type" : "GET",
                         "dataType":"json",
                         "data" : "parentId="+parentId+"&type="+type,
@@ -156,7 +159,7 @@
                 //初始化二级分类方法
                 function twoCategoryInit(parentId){
                     $.ajax({
-                        "url" : "category",
+                        "url" : "category/SelectCategorysList",
                         "type" : "GET",
                         "dataType":"json",
                         "data" : "parentId="+parentId,
@@ -186,7 +189,7 @@
 
                 function addCategory(name,parentId,type){
                     $.ajax({
-                        "url" : "addCategory"
+                        "url" : "category/addCategory"
                         ,"data" : {"name":name,"parentId":parentId,"type":type}
                         ,"dataType" : "json"
                         ,"success" : function (data) {
@@ -197,7 +200,7 @@
 
                 function updateCategory(name,id){
                     $.ajax({
-                        "url" : "updateCategory"
+                        "url" : "category/updateCategory"
                         ,"data" : {"name":name,"id":id}
                         ,"dataType" : "json"
                         ,"success" : function (data) {
@@ -209,7 +212,7 @@
                 function deleteCategory(id){
                     var flag;
                     $.ajax({
-                        "url" : "deleteCategory"
+                        "url" : "category/deleteCategory"
                         ,"data" : {"id":id}
                         ,"dataType" : "json"
                         ,async:false
@@ -232,7 +235,7 @@
                     typeValue = data.value;
                     categoryType(0,data.value);
                     table.reload('table', {
-                        url: 'category'
+                        url: 'category/SelectCategorysList'
                         ,where: {parentId:0,type:data.value }
                         ,page: {
                             curr: 1 //重新从第 1 页开始
@@ -254,7 +257,7 @@
                         dataValue = 0;
                     }
                     table.reload('table', {
-                        url: 'category?parentId='+dataValue
+                        url: 'category/SelectCategorysList'
                         ,where: {parentId:dataValue,type:typeValue }
                         ,page: {
                             curr: 1 //重新从第 1 页开始
@@ -271,7 +274,7 @@
                     var dataValue = data.value;
                     if(dataValue != -10){
                         table.reload('table', {
-                            url: 'category?parentId='+dataValue
+                            url: 'category/SelectCategorysList?parentId='+dataValue
                             ,page: {
                                 curr: 1 //重新从第 1 页开始
                             }
@@ -283,7 +286,7 @@
                 table.render({
                     elem: '#firstTable'
                     ,id: 'table'
-                    ,url: 'category?parentId=0'   //数据接口
+                    ,url: 'category/SelectCategorysList?parentId=0'   //数据接口
                     ,page: true        //开启分页
                     ,cols: [[          //表头
                          {field: 'id', title: 'ID'}
@@ -314,7 +317,7 @@
                 }
                   addCategory(data.name,parentId,typeValue);
                   table.reload('table', {
-                      url: 'category'
+                      url: 'category/SelectCategorysList'
                       ,where: {parentId:parentId,type:typeValue }
                       ,page: {
                           curr: 1 //重新从第 1 页开始

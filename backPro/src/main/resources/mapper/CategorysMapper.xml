@@ -16,7 +16,7 @@
         delete from categorys where id = #{id}
     </delete>
 
-    <select id="parentIdSelectCategorysList" resultType="Categorys">
+    <select id="SelectCategorysList" resultType="Categorys">
         SELECT id,VALUE,parent_id,
         (SELECT VALUE FROM categorys WHERE id = c.`parent_id`) parentname
         FROM categorys c WHERE parent_id = #{parentId}

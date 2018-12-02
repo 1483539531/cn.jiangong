@@ -13,7 +13,7 @@
         select * from backuser where zhanghao=#{param1} and password=#{param2}
     </select>
 
-    <select id="selectUserList" resultType="BackUser">
+    <select id="selectBackUserList" resultType="BackUser">
            select * from backuser
            <where>
                <if test="startdate !=null and startdate !=''">
