@@ -5,7 +5,7 @@ import java.util.Date;
 @Data
 public class BackUser {
 
-  private int id;
+  private Integer id;
   private String zhanghao;
   private String password;
   private int state;

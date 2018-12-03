@@ -87,7 +87,7 @@
                         保存
                     </button>
                 </div>
-
+            <input id="adminId" type="hidden" value="<#if RequestParameters['id']??>${RequestParameters['id']}</#if>">
 
             </form>
         </div>
@@ -111,6 +111,7 @@
                         ,"data" : {"id" : id}
                         ,"dataType" : "json"
                         ,"success" : function (data) {
+                            console.log(data)
                             var adminUser = data.backUser;
                             var roleList = data.roles;
                             $("[name='name']").val(adminUser.zhanghao);
