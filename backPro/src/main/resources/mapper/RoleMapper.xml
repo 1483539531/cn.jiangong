@@ -5,6 +5,13 @@
 
 <mapper namespace="cn.jiangong.mapper.RoleMapper">
 
+    <insert id="insertRole">
+        insert  into role  (name,comment) values (#{name},#{comment})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select last_insert_id() as id
+        </selectKey>
+    </insert>
+
     <select id="selectRoleList" resultType="Role">
         SELECT * FROM role
     </select>

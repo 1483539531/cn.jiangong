@@ -7,9 +7,9 @@
     </title>
 
 
-    <script src="js/jquery-1.12.4.js"></script>
-    <link rel="stylesheet" href="layui/css/layui.css">
-    <script src="layui/layui.js"></script>
+    <script src="/js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
     <style>
         .x-body{
             padding: 20px;
@@ -69,7 +69,7 @@
         table.render({
             elem: '#firstTable'
             ,id: 'table'
-            ,url: 'adminRole/selectRoleList'   //数据接口
+            ,url: '/adminRole/selectRoleList'   //数据接口
             ,page: true        //开启分页
             ,cols: [[          //表头
                 {field: 'id', title: 'ID'}
@@ -89,7 +89,7 @@
                     skin: 'layui-layer-molv' //样式类名
                     ,closeBtn: 0
                 }, function(index){
-                    deleteMenu(data.id)
+                    deleteRole(data.id)
                     obj.del();
                     layer.close(index);
                 });
@@ -103,7 +103,7 @@
                     area: ['700px', '500px'],
                     fixed: false, //不固定
                     maxmin: true,
-                    content: 'adminRoleEditPage?roleId='+roleId+"&name="+name+"&comment="+comment,
+                    content: '/adminRoleEditPage?roleId='+roleId+"&name="+name+"&comment="+comment,
                     end:function(){
                         table.reload('table', {
                             url: 'adminRole/selectRoleList'
@@ -127,18 +127,25 @@
     function role_add(){
         layer.open({
             type: 2,
-            area: ['700px', '600px'],
+            area: ['700px', '500px'],
             fixed: false, //不固定
             maxmin: true,
-            content: 'roleAddPage'
+            content: '/roleAddPage',
         });
+    }
+    
+    function deleteRole(id) {
+        $.ajax({
+            "url": "/adminRole/deleteRole"
+            , "data": {"id": id}
+            , "dataType": "json"
+        })
     }
 
              
 
 </script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>

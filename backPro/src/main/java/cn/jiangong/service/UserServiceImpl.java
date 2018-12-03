@@ -9,6 +9,7 @@ import cn.jiangong.mapper.UserPrivilegeMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +49,19 @@ public class UserServiceImpl {
                 stateNumber = 0;
             }
             return userMapper.updateBackUserState(stateNumber,id);
+    }
+
+    public boolean updateLoginDate(String id){
+        return userMapper.updateLoginDate(id);
+    }
+
+    @Transactional
+    public boolean insertBackUser(BackUser backUser,String roleId){
+        if(userMapper.insertBackUser(backUser) &&
+        userPrivilegeMapper.insert(backUser.getId(),Integer.parseInt(roleId))){
+            return true;
+        }
+        return false;
     }
 
     @Transactional

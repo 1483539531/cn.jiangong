@@ -38,6 +38,24 @@ public class RoleServiceImpl {
         return true;
     }
 
+    @Transactional
+    public boolean insertRole(Role role,String[] menusId){
+        Integer roleId = roleMapper.insertRole(role);
+        System.out.println(role.getId());
+        for (String s : menusId) {
+            roleMenuMapper.insert(role.getId(),s);
+        }
+        return true;
+    }
+
+    @Transactional
+    public boolean deleteRole(Integer id){
+       roleMapper.deleteRole(String.valueOf(id));
+       roleMenuMapper.delete(id);
+       return true;
+    }
+
+
 
 
 }

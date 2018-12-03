@@ -43,6 +43,21 @@ public class MenuServiceImpl {
         return menus;
     }
 
+    public List<Menu> selectCheckMenuList(String roleId){
+        List<Menu> firstMenus = menuMapper.selectManyMenuList("0");
+        for (Menu menu : firstMenus) {
+            List<Menu> twoMenus = menuMapper.roleSelectMenuList(roleId, String.valueOf(menu.getId()));
+            menu.setChildren(twoMenus);
+        }
+        return firstMenus;
+    }
+
+
+
+
+
+
+
 
 
 

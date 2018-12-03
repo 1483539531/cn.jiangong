@@ -9,9 +9,9 @@
 
 
 
-    <script src="js/jquery-1.12.4.js"></script>
-    <link rel="stylesheet" href="layui/css/layui.css">
-    <script src="layui/layui.js"></script>
+    <script src="/js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
     <style>
         .x-body{
             padding: 20px;
@@ -80,7 +80,7 @@
         firstCategoryInit();
         function firstCategoryInit(){
             $.ajax({
-                "url" : "adminMenu/selectOptionMenuList"
+                "url" : "/adminMenu/selectOptionMenuList"
                 ,"dataType" : "json"
                 ,"data": {"parentId":"0"}
                 ,"success" : function (data) {
@@ -94,7 +94,7 @@
 
         function insertMenu(name,parentId){
             $.ajax({
-                "url" : "adminMenu/insertMenu"
+                "url" : "/adminMenu/insertMenu"
                 ,"data" : {"name":name,"parentId":parentId}
                 ,"dataType" : "json"
             })
@@ -103,7 +103,7 @@
 
         function updateMenuUrl(id,url){
             $.ajax({
-                "url" : "adminMenu/updateMenuUrl"
+                "url" : "/adminMenu/updateMenuUrl"
                 ,"data" : {"id":id,"url":url}
                 ,"dataType" : "json"
             })
@@ -111,7 +111,7 @@
 
         function deleteMenu(id){
             $.ajax({
-                "url" : "adminMenu/deleteMenu"
+                "url" : "/adminMenu/deleteMenu"
                 ,"data" : {"id":id}
                 ,"dataType" : "json"
             })
@@ -122,7 +122,7 @@
 
         form.on('select(cname)', function(data){
             table.reload('table', {
-                url: 'adminMenu/selectListMenuList'
+                url: '/adminMenu/selectListMenuList'
                 ,where: {parentId:data.value }
                 ,page: {
                     curr: 1 //重新从第 1 页开始
@@ -133,7 +133,7 @@
         table.render({
             elem: '#firstTable'
             ,id: 'table'
-            ,url: 'adminMenu/selectListMenuList?parentId='+1   //数据接口
+            ,url: '/adminMenu/selectListMenuList?parentId='+1   //数据接口
             ,page: true        //开启分页
             ,cols: [[          //表头
                 {field: 'id', title: 'ID'}
@@ -158,7 +158,7 @@
             var parentId = data.field.cname;
             insertMenu(name,parentId);
             table.reload('table', {
-                url: 'adminMenu/selectListMenuList'
+                url: '/adminMenu/selectListMenuList'
                 ,where: {parentId:parentId }
                 ,page: {
                     curr: 1 //重新从第 1 页开始
@@ -192,7 +192,7 @@
                     area: ['700px', '500px'],
                     fixed: false, //不固定
                     maxmin: true,
-                    content: 'adminMenuEditPage?id='+id+"&level="+level+"&name="+name+"&parentId="+parentId
+                    content: '/adminMenuEditPage?id='+id+"&level="+level+"&name="+name+"&parentId="+parentId
                 });
             }
 

@@ -25,9 +25,13 @@ public interface UserMapper {
      @Update("update backUser set zhanghao = #{zhanghao},password = #{password}")
      boolean updateBackUser(@Param("zhanghao") String zhanghao,@Param("password") String password);
 
+     @Update("UPDATE backuser SET logindate = NOW() where id = #{id}")
+     public boolean updateLoginDate(String id);
 
      @Select("select menu_id roleId  from user_privilege where user_id = #{id}")
      BackUser selectRoleId(String id);
+
+     boolean insertBackUser(BackUser backUser);
 
 
 

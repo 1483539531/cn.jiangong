@@ -5,11 +5,15 @@
         <title>
             X-admin v1.0
         </title>
-        <link rel="stylesheet" href="css/x-admin.css" media="all">
-        <script src="js/jquery-1.12.4.js"></script>
-        <link rel="stylesheet" href="layui/css/layui.css">
-        <script src="layui/layui.js"></script>
-        <script src="js/x-admin.js"></script>
+
+        <script src="/js/jquery-1.12.4.js"></script>
+
+        <link rel="stylesheet" href="/lib/layui/css/layui.css">
+        <script src="/lib/layui/layui.js"></script>
+
+        <link rel="stylesheet" href="/css/x-admin.css" media="all">
+        <script src="/js/x-layui.js" ></script>
+        <script src="/js/x-admin.js"></script>
     </head>
     <body>
 
@@ -39,18 +43,18 @@
             <div class="layui-header header header-demo">
                 <div class="layui-main">
 
-                    <a class="logo" href="index.ftl">建设网</a>
+                    <a class="logo" href="index.ftl">建设网1</a>
 
                     <ul class="layui-nav" lay-filter="">
                         <!--logo图片-->
-                      <li class="layui-nav-item"><img src="./images/logo.png" class="layui-circle" style="border: 2px solid #A9B7B7;" width="35px" alt=""></li>
+                      <li class="layui-nav-item"><img src="/images/logo.png" class="layui-circle" style="border: 2px solid #A9B7B7;" width="35px" alt=""></li>
 
                       <li class="layui-nav-item">
                         <a href="javascript:;">用户name</a>
                         <dl class="layui-nav-child"> <!-- 二级菜单 -->
                           <dd><a href="">个人信息</a></dd>
                           <dd><a href="">切换帐号</a></dd>
-                          <dd><a href="login.jsp">退出</a></dd>
+                          <dd><a href="/loginPage">退出</a></dd>
                         </dl>
                       </li>
 
@@ -171,17 +175,19 @@
                         <li class="layui-nav-item">
 
                             <a class="javascript:;" href="javascript:;">
-                                <i class="layui-icon" style="top: 3px;">&#xe634;</i><cite>轮播管理</cite>
+                                轮播管理
                             </a>
 
                             <dl class="layui-nav-child">
-
-                                    <dd class="">
-                                        <a href="javascript:;" _href="./banner-list.html">
-                                            <cite>轮播列表</cite>
-                                        </a>
+                                    <dd>
+                                        <a href="javascript:;" _href="./question-list.html">轮播列表</a>
                                     </dd>
+                            </dl>
 
+                            <dl class="layui-nav-child">
+                                <dd>
+                                    <a href="javascript:;" _href="./question-del.html">轮播列表</a>
+                                </dd>
                             </dl>
 
                         </li>
@@ -189,7 +195,7 @@
 
 
 
-                        <!--订单管理-->
+                       <#-- <!--订单管理&ndash;&gt;
                         <li class="layui-nav-item">
 
                             <a class="javascript:;" href="javascript:;">
@@ -199,7 +205,7 @@
                             <dl class="layui-nav-child">
 
                                     <dd class="">
-                                        <a href="javascript:;" _href="./welcome.html">
+                                        <a href="javascript:;" _href="./welcome.ftl">
                                             <cite>订单列表（待开发）</cite>
                                         </a>
                                     </dd>
@@ -211,7 +217,7 @@
 
 
 
-                        <!--分类管理-->
+                        <!--分类管理&ndash;&gt;
                         <li class="layui-nav-item">
 
                             <a class="javascript:;" href="javascript:;">
@@ -234,7 +240,7 @@
 
 
 
-                        <!--评论管理-->
+                        <!--评论管理&ndash;&gt;
                         <li class="layui-nav-item">
 
                             <a class="javascript:;" href="javascript:;">
@@ -263,7 +269,7 @@
 
 
 
-                        <!--会员管理-->
+                        <!--会员管理&ndash;&gt;
                         <li class="layui-nav-item">
 
                             <a class="javascript:;" href="javascript:;">
@@ -317,7 +323,7 @@
 
 
 
-                        <!--管理员管理-->
+                        <!--管理员管理&ndash;&gt;
                         <li class="layui-nav-item">
 
                             <a class="javascript:;" href="javascript:;">
@@ -357,7 +363,7 @@
 
 
 
-                        <!--系统统计-->
+                        <!--系统统计&ndash;&gt;
                         <li class="layui-nav-item">
 
                             <a class="javascript:;" href="javascript:;">
@@ -415,7 +421,7 @@
                                 </dd>
 
                                 <dd class="">
-                                    <a href="http://echarts.baidu.com/examples.html" target="_blank" _href="./welcome.html">
+                                    <a href="http://echarts.baidu.com/examples.html" target="_blank" _href="./welcome.ftl">
                                         <cite>更多案例</cite>
                                     </a>
                                 </dd>
@@ -426,7 +432,7 @@
 
 
 
-                        <!--系统设置-->
+                        <!--系统设置&ndash;&gt;
                         <li class="layui-nav-item">
 
                             <a class="javascript:;" href="javascript:;">
@@ -494,16 +500,8 @@
 
                             </dl>
 
-                        </li>
-
-
-
+                        </li>-->
                     </ul>
-
-
-
-
-
 
 
 
@@ -524,7 +522,7 @@
                 </ul>
                 <div class="layui-tab-content site-demo site-demo-body">
                     <div class="layui-tab-item layui-show">
-                        <iframe frameborder="0" src="welcome.html" class="x-iframe"></iframe>
+                        <iframe frameborder="0" src="/welcomePage" class="x-iframe"></iframe>
                     </div>
                 </div>
             </div>
@@ -540,30 +538,24 @@
 
 <script>
 
-    layui.use(['laydate', 'element', 'laypage', 'layer', 'form', 'table','element '], function () {
-        var laydate = layui.laydate;//日期插件
-        var lement = layui.element;//面包导航
-        var laypage = layui.laypage;//分页
-        var layer = layui.layer;//弹出层
-        var form = layui.form;
-        var table = layui.table;
-        var element = layui.element;
-
 
 
         selectEveryMenuList_id()
     function selectEveryMenuList_id() {
         $.ajax({
-            "url" : "adminMenu/selectEveryMenuList_id"
+            "url" : "/index/idSelectEveryMenuList"
             ,"dataType" : "json"
+            ,async : false
             ,"success" : function (data) {
                 console.log(data)
                 var str = "";
                 for (var i = 0; i <data.length ; i++) {
                     var childrenValue = data[i].children;
-                    str += "<li class=layui-nav-item><a class=\"javascript:;\" href=\"javascript:;\"> <i class=layui-icon style=top:3px;>&#xe634;</i><cite>"+data[i].name+"</cite> </a><dl class=layui-nav-child>"
+                    if(childrenValue.length!=0){
+                        str += "<li class=\"layui-nav-item \"><a class=\"javascript:;\" href=\"javascript:;\"> <i class=layui-icon style=top:3px;>&#xe634;</i><cite>"+data[i].name+"</cite> </a><dl class=layui-nav-child>"
+                    }
                     for (var j = 0; j < childrenValue.length ; j++) {
-                        str += " <dd> <a _href=./banner-list.html> <cite>"+childrenValue[j].name+"</cite> </a> </dd> "
+                        str += " <dd> <a _href="+childrenValue[j].url+"> <cite>"+childrenValue[j].name+"</cite> </a> </dd> "
                     }
                     str += "</dl></li>";
                 }
@@ -572,8 +564,5 @@
             }
         })
     }
-
-
-    })
 </script>
 </html>

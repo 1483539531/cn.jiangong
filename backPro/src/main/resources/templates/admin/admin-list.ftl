@@ -9,9 +9,9 @@
 
 
 
-    <script src="js/jquery-1.12.4.js"></script>
-    <link rel="stylesheet" href="layui/css/layui.css">
-    <script src="layui/layui.js"></script>
+    <script src="/js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
     <style>
         .x-body{
             padding: 20px;
@@ -60,9 +60,8 @@
 
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
-        <button class="layui-btn" onclick="admin_add('添加用户','admin-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加
-        </button>
-
+        <button class="layui-btn" onclick="admin_add()">添加</button>
+    </xblock>
     <#--   <a title="编辑" href="javascript:;" onclick="admin_edit('编辑','admin-edit.ftl','4','','510')"></a>
 -->
 
@@ -83,7 +82,7 @@
 
         function updateState(state,id){
             $.ajax({
-                "url" : "adminList/updateBackUserState"
+                "url" : "/adminList/updateBackUserState"
                 ,"data" :{"state": state,"id":id}
                 ,"type" : "GET"
                 ,"dateType" : "json"
@@ -99,7 +98,7 @@
         table.render({
             elem: '#firstTable'
             ,id: 'table'
-            ,url: 'adminList/selectBackUserList'   //数据接口
+            ,url: '/adminList/selectBackUserList'   //数据接口
             ,page: true        //开启分页
             ,cols: [[          //表头
                 {field: 'id', title: 'ID',width: 250}
@@ -122,7 +121,7 @@
         form.on('submit(sreach)',function (data) {
             var dataValue = data.field;
             table.reload('table', {
-                url: 'adminList/selectBackUserList'
+                url: '/adminList/selectBackUserList'
                 ,where: {startdate:dataValue.startdate,enddate:dataValue.enddate,name:dataValue.username}
                 ,page: {
                     curr: 1 //重新从第 1 页开始
@@ -157,7 +156,7 @@
                     area: ['700px', '500px'],
                     fixed: false, //不固定
                     maxmin: true,
-                    content: 'adminEditPage?id='+data.id
+                    content: '/adminEditPage?id='+data.id
                 });
             }
 
@@ -181,7 +180,6 @@
 
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
@@ -191,63 +189,21 @@
 
 
 <script>
-    //批量删除提交
-    function delAll() {
-        layer.confirm('确认要删除吗？', function (index) {
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-        });
-    }
+
 
     /*添加*/
-    function admin_add(title, url, w, h) {
-        x_admin_show(title, url, w, h);
-    }
-
-    /*停用*/
-    function admin_stop(obj, id) {
-        layer.confirm('确认要停用吗？', function (index) {
-            //发异步把用户状态进行更改
-            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="admin_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
-            $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>');
-            $(obj).remove();
-            layer.msg('已停用!', {icon: 5, time: 1000});
+    function admin_add() {
+        layer.open({
+            type: 2,
+            area: ['700px', '500px'],
+            fixed: false, //不固定
+            maxmin: true,
+            content: '/adminAddPage'
         });
     }
 
-    /*启用*/
-    function admin_start(obj, id) {
-        layer.confirm('确认要启用吗？', function (index) {
-            //发异步把用户状态进行更改
-            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="admin_stop(this,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
-            $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>');
-            $(obj).remove();
-            layer.msg('已启用!', {icon: 6, time: 1000});
-        });
-    }
 
-    //编辑
-    function admin_edit(title, url, id, w, h) {
-        x_admin_show(title, url, w, h);
-    }
-
-    /*删除*/
-    function admin_del(obj, id) {
-        layer.confirm('确认要删除吗？', function (index) {
-            //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!', {icon: 1, time: 1000});
-        });
-    }
 </script>
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
 </body>
 </html>

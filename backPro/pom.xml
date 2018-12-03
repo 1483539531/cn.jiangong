@@ -108,8 +108,6 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-
-
     </dependencies>
 
 
@@ -137,6 +135,8 @@
                 <includes>
                     <include>static/fonts/**</include>
                     <include>static/lib/**</include>
+                    <include>static/css/**</include>
+                    <include>static/js/**</include>
                 </includes>
             </resource>
         </resources>

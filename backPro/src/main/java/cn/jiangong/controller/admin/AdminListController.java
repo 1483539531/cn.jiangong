@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Controller
-@RequestMapping("adminList")
+@RequestMapping("/adminList")
 public class AdminListController {
 
     @Autowired
@@ -27,12 +27,13 @@ public class AdminListController {
     RoleServiceImpl roleService;
 
     @RequestMapping("/login")
-    public String login(String zhanghao, String password, HttpServletRequest request){
-        BackUser backUsers = userService.login(zhanghao, password);
+    public String login(String username, String pass, HttpServletRequest request){
+        BackUser backUsers = userService.login(username, pass);
         if(backUsers == null){
             return "login";
         }else{
             request.getSession().setAttribute("user",backUsers);
+            userService.updateLoginDate(String.valueOf(backUsers.getId()));
         }
         return "index";
     }
@@ -70,12 +71,33 @@ public class AdminListController {
         return JSON.toJSONString(hashMap);
     }
 
+    @RequestMapping("/selectRoleList")
+    @ResponseBody
+    public Object selectRoleList(){
+        PageInfo<Role> pageInfo = roleService.selectRoleList(1, 20);
+        List<Role> roles = pageInfo.getList();
+        HashMap<String,Object> hashMap = new HashMap<String,Object>();
+        hashMap.put("roles",roles);
+        return JSON.toJSONString(hashMap);
+    }
+
+
+
+
     @ResponseBody
     @RequestMapping("updateBackUser")
     public Object updateBackUser(String zhanghao, String password,Integer userId,Integer roleId){
            boolean s = userService.updateBackUser(zhanghao, password, userId, roleId);
              System.out.println(s);
             return  s;
+    }
+
+    @ResponseBody
+    @RequestMapping("insertBackUser")
+    public Object insertBackUser(String roleId1,BackUser backUser){
+        System.out.println(backUser);
+        System.out.println(roleId1);
+        return userService.insertBackUser(backUser,roleId1);
     }
 
 }

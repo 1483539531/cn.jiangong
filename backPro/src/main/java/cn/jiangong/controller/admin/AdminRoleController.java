@@ -42,4 +42,20 @@ public class AdminRoleController {
         return roleService.updateRole(role,menusId);
     }
 
+    @ResponseBody
+    @RequestMapping("/insertRole")
+    public  Object insertRole(String name,String comment,String data){
+        String[] menusId = data.split("a");
+        Role role = new Role();
+        role.setName(name);
+        role.setComment(comment);
+        return roleService.insertRole(role,menusId);
+    }
+
+    @ResponseBody
+    @RequestMapping("deleteRole")
+    public Object deleteRole(Integer id){
+        return roleService.deleteRole(id);
+    }
+
 }

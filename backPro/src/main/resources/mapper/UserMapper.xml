@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.jiangong.mapper.UserMapper">
+    <insert id="insertBackUser">
+        insert into backuser (zhanghao, password,logindate) values (#{zhanghao},#{password},now())
+    </insert>
+
     <update id="updateBackUserState">
         update backuser b,categorys c set b.state = #{state} where b.id = #{id}
     </update>

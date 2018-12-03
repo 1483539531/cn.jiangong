@@ -6,7 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class JumpController {
 
+    //首页欢迎页
+    @RequestMapping("welcomePage")
+    public String welcomePage(){
+        return "welcome";
+    }
 
+    @RequestMapping("loginPage")
+    public String loginPage(){
+        return "login";
+    }
 
 
     //管理员管理页面-------------------------------------------
@@ -33,6 +42,11 @@ public class JumpController {
         return "admin/admin-edit";
     }
 
+    @RequestMapping("adminAddPage")
+    public String adminAddPage(){
+        return "admin/admin-add";
+    }
+
     //角色子页面
     @RequestMapping("adminRolePage")
     public String adminRolePage(){
@@ -46,7 +60,7 @@ public class JumpController {
 
     @RequestMapping("roleAddPage")
     public String  roleAddPage(){
-        return "admin/admin-add";
+        return "admin/role-add";
     }
 
 
@@ -56,6 +70,7 @@ public class JumpController {
     public String categoryPage(){
         return "category";
     }
+
 
 
 }

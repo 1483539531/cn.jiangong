@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
     
@@ -7,14 +6,12 @@
         <title>
             X-admin v1.0
         </title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="./css/x-admin.css" media="all">
+        <link rel="stylesheet" href="/css/x-admin.css" media="all">
+
+        <script src="/js/jquery-1.12.4.js"></script>
+        <link rel="stylesheet" href="/layui/css/layui.css">
+        <script src="/layui/layui.js"></script>
+
     </head>
     
     <body style="background-color: #393D49">
@@ -34,61 +31,68 @@
             </div>
             <div class="x-mid">
                 <div class="x-avtar">
-                    <img src="./images/logo.png" alt="">
+                    <img src="/images/logo.png" alt="">
                 </div>
                 <div class="input">
+
+
                     <form class="layui-form">
+
                         <div class="layui-form-item x-login-box">
                             <label for="username" class="layui-form-label">
                                 <i class="layui-icon">&#xe612;</i>
                             </label>
                             <div class="layui-input-inline">
-                                <input type="text" id="username" name="username" required="" lay-verify="username"
-                                autocomplete="off" placeholder="username" class="layui-input">
+                                <input type="text" id="username" name="username" required
+                                autocomplete="off"  class="layui-input">
                             </div>
                         </div>
+
                         <div class="layui-form-item x-login-box">
                             <label for="pass" class="layui-form-label">
                                 <i class="layui-icon">&#xe628;</i>
                             </label>
                             <div class="layui-input-inline">
-                                <input type="password" id="pass" name="pass" required="" lay-verify="pass"
-                                autocomplete="off" placeholder="******" class="layui-input">
+                                <input type="password" id="pass" name="pass" required
+                                autocomplete="off"  class="layui-input">
                             </div>
                         </div>
+
                         <div class="layui-form-item" id="loginbtn">
                             <button  class="layui-btn" lay-filter="save" lay-submit="">
                                 登 录
                             </button>
                         </div>
+
                     </form>
+
+
+
                 </div>
             </div>
         </div>
         <p style="color:#fff;text-align: center;">Copyright © 2017.Company name All rights X-admin </p>
-        <script src="./lib/layui/layui.js" charset="utf-8">
-        </script>
         <script>
-            layui.use(['form'],
-            function() {
-                $ = layui.jquery;
-                var form = layui.form(),
-                layer = layui.layer;
+            layui.use(['laydate', 'element', 'laypage', 'layer', 'form', 'table'], function () {
+                var laydate = layui.laydate;//日期插件
+                var lement = layui.element;//面包导航
+                var laypage = layui.laypage;//分页
+                var layer = layui.layer;//弹出层
+                var form = layui.form;
+                var table = layui.table;
 
-                $('.x-login-right li').click(function(event) {
+                $('.x-login-right li').click(function (event) {
                     color = $(this).attr('color');
                     $('body').css('background-color', color);
                 });
 
                 //监听提交
-                form.on('submit(save)',
-                function(data) {
-                    console.log(data);
-                    location.href = "login?zhanghao="+data.field.username+"&password="+data.field.pass;
-                    return false;
-                });
+                form.on('submit(save)', function (data) {
+                            location.href = "/adminList/login?username=" + data.field.username + "&pass=" + data.field.pass;
+                            return false;
+                        });
 
-            });
+            })
 
         </script>
     </body>

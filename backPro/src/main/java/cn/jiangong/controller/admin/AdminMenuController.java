@@ -48,16 +48,10 @@ public class AdminMenuController {
     @ResponseBody
     @RequestMapping("/selectEveryMenuList")
     public Object selectEveryMenuList(String roleId){
-        return JSON.toJSONString(menuService.selectEveryMenuList("1"));
+        return JSON.toJSONString(menuService.selectEveryMenuList(roleId));
     }
 
-    @ResponseBody
-    @RequestMapping("/selectEveryMenuList_id")
-    public Object selectEveryMenuList_id(String id){
-        BackUser user = userService1.selectRoleId("1");
-        System.out.println(user.getRoleId());
-        return JSON.toJSONString(menuService.selectEveryMenuList(user.getRoleId()));
-    }
+   
 
 
 

@@ -7,9 +7,9 @@
             X-admin v1.0
         </title>
 
-        <script src="js/jquery-1.12.4.js"></script>
-        <link rel="stylesheet" href="layui/css/layui.css">
-        <script src="layui/layui.js"></script>
+        <script src="/js/jquery-1.12.4.js"></script>
+        <link rel="stylesheet" href="/layui/css/layui.css">
+        <script src="/layui/layui.js"></script>
         <style>
             .x-body{
                 padding: 20px;
@@ -93,7 +93,7 @@
                 function selectEveryMenuList(){
                     var roleId = $("#roleId").val();
                    $.ajax({
-                        "url" : "adminMenu/selectEveryMenuList"
+                        "url" : "/adminMenu/selectEveryMenuList"
                         ,"data" : {"roleId":roleId}
                         ,"dataType" : "json"
                         ,"success" : function (data) {
@@ -107,6 +107,7 @@
                                    }else {
                                        str += "<input name=menu type=checkbox value="+child[j].id+" title="+child[j].name+">"
                                    }
+
                                }
                                str += "</div></td></tr>";
                                $("#MenuList").append(str)
@@ -121,7 +122,7 @@
                 function updateRole(name,comment,data){
                     var roleId = $("#roleId").val();
                     $.ajax({
-                        "url" : "adminRole/updateRole"
+                        "url" : "/adminRole/updateRole"
                         ,"data" : {"roleId":roleId,"name":name,"comment":comment,"data":data}
                         ,"type":"POST"
                         ,"dataType" : "json"

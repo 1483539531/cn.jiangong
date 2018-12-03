@@ -6,9 +6,9 @@
             X-admin v1.0
         </title>
 
-        <script src="js/jquery-1.12.4.js"></script>
-        <link rel="stylesheet" href="layui/css/layui.css">
-        <script src="layui/layui.js"></script>
+        <script src="/js/jquery-1.12.4.js"></script>
+        <link rel="stylesheet" href="/layui/css/layui.css">
+        <script src="/layui/layui.js"></script>
         <style>
             .x-body{
                 padding: 20px;
@@ -92,7 +92,6 @@
             </form>
         </div>
 
-        <input type="hidden" id="adminId" value="<#if RequestParameters['id']??>${RequestParameters['id']}</#if>">
 
         <script>
             layui.use(['laydate', 'element', 'laypage', 'layer', 'form', 'table'], function () {
@@ -108,7 +107,7 @@
                 function selectAdminUser(){
                     var id = $("#adminId").val()
                     $.ajax({
-                        "url" : "adminList/selectAdminUser"
+                        "url" : "/adminList/selectAdminUser"
                         ,"data" : {"id" : id}
                         ,"dataType" : "json"
                         ,"success" : function (data) {
@@ -130,7 +129,7 @@
                 function updateAdminUser(name,pass,roleId){
                     var id = $("#adminId").val()
                     $.ajax({
-                        "url" : "adminList/updateBackUser"
+                        "url" : "/adminList/updateBackUser"
                         ,"data" : {"zhanghao" : name,"password":pass,"roleId":roleId,"userId":id}
                         ,"dataType" : "json"
                     })

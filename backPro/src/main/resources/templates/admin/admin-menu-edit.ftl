@@ -9,9 +9,9 @@
 
 
 
-    <script src="js/jquery-1.12.4.js"></script>
-    <link rel="stylesheet" href="layui/css/layui.css">
-    <script src="layui/layui.js"></script>
+    <script src="/js/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
     <style>
         .x-body{
             padding: 20px;
