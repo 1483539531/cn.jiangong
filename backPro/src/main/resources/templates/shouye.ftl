@@ -138,7 +138,7 @@
                                     </dd>
 
                                     <dd class="">
-                                        <a href="javascript:;" _href="./recruiterList.html">
+                                        <a href="javascript:;" _href="./recruiterList.ftl">
                                             <cite>品牌管理（待开发）</cite>
                                         </a>
                                     </dd>
@@ -179,7 +179,7 @@
 
                             <dl class="layui-nav-child">
                                     <dd>
-                                        <a href="javascript:;" _href="./question-list.html">轮播列表</a>
+                                        <a href="javascript:;" _href="./question-list.ftl">轮播列表</a>
                                     </dd>
                             </dl>
 
@@ -243,13 +243,13 @@
                             <dl class="layui-nav-child">
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./comment-list.html">
+                                    <a href="javascript:;" _href="./comment-list.ftl">
                                         <cite>评论列表</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./feedback-list.html">
+                                    <a href="javascript:;" _href="./feedback-list.ftl">
                                         <cite>意见反馈</cite>
                                     </a>
                                 </dd>
@@ -272,37 +272,37 @@
                             <dl class="layui-nav-child">
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="member-list.html">
+                                    <a href="javascript:;" _href="member-list.ftl">
                                         <cite>会员列表</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./member-del.html">
+                                    <a href="javascript:;" _href="./member-del.ftl">
                                         <cite>删除会员</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./member-level.html">
+                                    <a href="javascript:;" _href="./member-level.ftl">
                                         <cite>等级管理</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./member-kiss.html">
+                                    <a href="javascript:;" _href="./member-kiss.ftl">
                                         <cite>积分管理</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./member-view.html">
+                                    <a href="javascript:;" _href="./member-view.ftl">
                                         <cite>浏览记录</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./member-view.html">
+                                    <a href="javascript:;" _href="./member-view.ftl">
                                         <cite>分享记录</cite>
                                     </a>
                                 </dd>
@@ -337,11 +337,6 @@
                                     </a>
                                 </dd>
 
-                                <dd class="">
-                                    <a href="javascript:;" _href="./admin-cate.html">
-                                        <cite>权限分类</cite>
-                                    </a>
-                                </dd>
 
                                 <dd class="">
                                     <a href="javascript:;" _href="adminMenuPage">
@@ -366,58 +361,54 @@
                             <dl class="layui-nav-child">
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./echarts1.html">
+                                    <a href="javascript:;" _href="./echarts1.ftl">
                                         <cite>拆线图</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./echarts2.html">
+                                    <a href="javascript:;" _href="./echarts2.ftl">
                                         <cite>柱状图</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./echarts3.html">
+                                    <a href="javascript:;" _href="./echarts3.ftl">
                                         <cite>地图</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./echarts4.html">
+                                    <a href="javascript:;" _href="./echarts4.ftl">
                                         <cite>饼图</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./echarts5.html">
+                                    <a href="javascript:;" _href="./echarts5.ftl">
                                         <cite>雷达图</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./echarts6.html">
+                                    <a href="javascript:;" _href="./echarts6.ftl">
                                         <cite>k线图</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./echarts7.html">
+                                    <a href="javascript:;" _href="./echarts7.ftl">
                                         <cite>热力图</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./echarts8.html">
+                                    <a href="javascript:;" _href="./echarts8.ftl">
                                         <cite>仪表图</cite>
                                     </a>
                                 </dd>
 
-                                <dd class="">
-                                    <a href="http://echarts.baidu.com/examples.html" target="_blank" _href="./welcome.ftl">
-                                        <cite>更多案例</cite>
-                                    </a>
-                                </dd>
+
 
                             </dl>
 
@@ -435,59 +426,38 @@
                             <dl class="layui-nav-child">
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./sys-set.html">
+                                    <a href="javascript:;" _href="./sys-set.ftl">
                                         <cite>系统设置</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./sys-data.html">
+                                    <a href="javascript:;" _href="./sys-data.ftl">
                                         <cite>数字字典</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./sys-shield.html">
+                                    <a href="javascript:;" _href="./sys-shield.ftl">
                                         <cite>屏蔽词</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./sys-log.html">
+                                    <a href="javascript:;" _href="./sys-log.ftl">
                                         <cite>系统日志</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./sys-link.html">
+                                    <a href="javascript:;" _href="./sys-link.ftl">
                                         <cite>友情链接</cite>
                                     </a>
                                 </dd>
 
                                 <dd class="">
-                                    <a href="javascript:;" _href="./sys-qq.html">
+                                    <a href="javascript:;" _href="./sys-qq.ftl">
                                         <cite>第三方登录</cite>
-                                    </a>
-                                </dd>
-
-                            </dl>
-
-                        </li>
-
-
-
-
-                        <li class="layui-nav-item">
-
-                            <a class="javascript:;" href="javascript:;">
-                                <i class="layui-icon" style="top: 3px;">&#xe634;</i><cite>轮播管理</cite>
-                            </a>
-
-                            <dl class="layui-nav-child">
-
-                                <dd class="">
-                                    <a href="javascript:;" _href="./banner-list.html">
-                                        <cite>轮播列表</cite>
                                     </a>
                                 </dd>
 
