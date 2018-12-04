@@ -17,6 +17,11 @@ public class JumpController {
         return "login";
     }
 
+    @RequestMapping("indexPage")
+    public String indexPage(){
+        return "shouye";
+    }
+
 
     //管理员管理页面-------------------------------------------
 
@@ -71,6 +76,54 @@ public class JumpController {
         return "category";
     }
 
+
+
+
+
+    //问题管理------------------------------------------------
+    @RequestMapping("questionListPage")
+    public String questionListPage(){
+        return "question/question-list";
+    }
+
+    @RequestMapping("questionDelPage")
+    public String questionDelPage(){
+        return "question/question-del";
+    }
+
+    @RequestMapping("questionEditPage")
+    public String questionEditPage(){
+        return "question/question-edit";
+    }
+
+    @RequestMapping("questionAddPage")
+    public String questionAddPage(){
+        return "question/question-add";
+    }
+
+
+
+    //评论管理------------------------------------------------
+
+    //评论列表
+    @RequestMapping("commentListPage")
+    public String commentListPage(){
+        return "pinglun/comment-list";
+    }
+
+    //列表反馈
+    @RequestMapping("feedbackListPage")
+    public String feedbackListPage(){
+        return "pinglun/feedback-list";
+    }
+
+    @RequestMapping("feedbackEditPage")
+    public String feedbackEditPage(){
+        return "pinglun/feedback-edit";
+    }
+
+
+    //会员管理------------------------------------------------
 
 
 }

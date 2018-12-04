@@ -43,7 +43,7 @@
             <div class="layui-header header header-demo">
                 <div class="layui-main">
 
-                    <a class="logo" href="index.ftl">建设网1</a>
+                    <a class="logo" href="/indexPage">建设网1</a>
 
                     <ul class="layui-nav" lay-filter="">
                         <!--logo图片-->
@@ -96,8 +96,7 @@
                     <ul class="layui-nav layui-nav-tree site-demo-nav" id="side1" lay-filter="side">
 
 
-
-                        <!--问题管理-->
+                      <#--  <!--问题管理&ndash;&gt;
                         <li class="layui-nav-item">
 
                             <a class="javascript:;" href="javascript:;">
@@ -107,14 +106,14 @@
                             <dl class="layui-nav-child">
 
                                     <dd class="">
-                                        <a href="javascript:;" _href="./question-list.html">
+                                        <a href="javascript:;" _href="/questionListPage">
                                             <cite>问题列表</cite>
                                         </a>
                                     </dd>
 
 
                                     <dd class="">
-                                        <a href="javascript:;" _href="./question-del.html">
+                                        <a href="javascript:;" _href="/questionDelPage">
                                             <cite>删除问题</cite>
                                         </a>
                                     </dd>
@@ -123,7 +122,7 @@
 
                         </li>
 
-                        <!--产品管理-->
+                        <!--产品管理&ndash;&gt;
                         <li class="layui-nav-item">
 
                             <a class="javascript:;" href="javascript:;">
@@ -171,7 +170,7 @@
 
 
 
-                        <!--轮播管理-->
+                        <!--轮播管理&ndash;&gt;
                         <li class="layui-nav-item">
 
                             <a class="javascript:;" href="javascript:;">
@@ -184,18 +183,12 @@
                                     </dd>
                             </dl>
 
-                            <dl class="layui-nav-child">
-                                <dd>
-                                    <a href="javascript:;" _href="./question-del.html">轮播列表</a>
-                                </dd>
-                            </dl>
-
-                        </li>
+                        </li>-->
 
 
 
 
-                       <#-- <!--订单管理&ndash;&gt;
+                       <!--订单管理&ndash;&gt;
                         <li class="layui-nav-item">
 
                             <a class="javascript:;" href="javascript:;">

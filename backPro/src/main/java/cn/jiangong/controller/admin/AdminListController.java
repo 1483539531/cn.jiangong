@@ -1,9 +1,7 @@
 package cn.jiangong.controller.admin;
 
 import cn.jiangong.entity.BackUser;
-import cn.jiangong.entity.Menu;
 import cn.jiangong.entity.Role;
-import cn.jiangong.service.MenuServiceImpl;
 import cn.jiangong.service.RoleServiceImpl;
 import cn.jiangong.service.UserServiceImpl;
 import com.alibaba.fastjson.JSON;
@@ -35,7 +33,7 @@ public class AdminListController {
             request.getSession().setAttribute("user",backUsers);
             userService.updateLoginDate(String.valueOf(backUsers.getId()));
         }
-        return "index";
+        return "shouye";
     }
 
     @ResponseBody
