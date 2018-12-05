@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.jiangong.mapper.ZhaobiaoMapper">
+
+    <select id="selectZhaobiaoList" resultType="Zhaobiao">
+      SELECT zhaobiao_number,
+            (SELECT VALUE FROM categorys WHERE id = z.`zhaobiao_hangye`) zhaobiaoHangyeValue,
+            (SELECT VALUE FROM categorys WHERE id = z.`money_source`) moneySourceValue,
+            (SELECT VALUE FROM categorys WHERE id = z.`city_address`) cityAddressValue,
+            NAME,phone,money,submission,id,zhuangtai FROM zhaobiao z
+        <where>
+            <if test="startdate !=null and startdate !=''">
+                and submission  &gt; #{startdate}
+            </if>
+            <if test="enddate !=null and enddate !=''">
+                and submission  &lt; #{enddate}
+            </if>
+            <if test="zhaobiao.zhaobiaoNumber !=null and zhaobiao.zhaobiaoNumber !=''">
+                and zhaobiao_number like concat ('%',#{zhaobiao.zhaobiaoNumber},'%')
+            </if>
+            <if test="zhaobiao.cityAddress !=null">
+                and city_address = #{zhaobiao.cityAddress}
+            </if>
+        </where>
+    </select>
+
+
+
+</mapper>

@@ -101,10 +101,10 @@
         }
 
 
-        function updateMenuUrl(id,url){
+        function updateMenuUrl(id,url,name){
             $.ajax({
                 "url" : "/adminMenu/updateMenuUrl"
-                ,"data" : {"id":id,"url":url}
+                ,"data" : {"id":id,"url":url,"name":name}
                 ,"dataType" : "json"
             })
         }
@@ -137,7 +137,7 @@
             ,page: true        //开启分页
             ,cols: [[          //表头
                 {field: 'id', title: 'ID'}
-                ,{field: 'name', title: '值'}
+                ,{field: 'name', title: '值',edit:true}
                 ,{field: 'url', title: '菜单路径',edit:true }
                 ,{field: 'level', title: '菜单等级'}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
@@ -192,7 +192,7 @@
                     area: ['700px', '500px'],
                     fixed: false, //不固定
                     maxmin: true,
-                    content: '/adminMenuEditPage?id='+id+"&level="+level+"&name="+name+"&parentId="+parentId
+                    content: '/adminMenuEditPage?id='+id
                 });
             }
 
@@ -201,7 +201,7 @@
 
         table.on('edit(firstTable)', function(obj){ //注：edit是固定事件名，test是table原始容器的属性 lay-filter="对应的值"
            var data = obj.data;
-            updateMenuUrl(data.id, data.url)
+            updateMenuUrl(data.id, data.url,data.name)
         });
 
 

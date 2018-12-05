@@ -23,9 +23,9 @@ public interface MenuMapper {
 
 
 
-    @Update("update menu set url = #{url} where id = #{id}")
+    @Update("update menu set url = #{url},name = #{name} where id = #{id}")
     boolean updateMenu(
-            @Param("id")String id,@Param("url")String url);
+            @Param("id")String id,@Param("url")String url,@Param("name") String name);
 
 
     @Delete("delete from menu where id = #{id}")

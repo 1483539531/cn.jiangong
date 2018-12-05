@@ -58,6 +58,7 @@
                               <option value='zhiwei'>职位分类</option>
                               <option value='yezhu'>业主分类</option>
                               <option value='laiyuan'>资金来源分类</option>
+                              <option value='dizhi'>地址管理</option>
                           </select>
                       </div>
 
@@ -394,15 +395,6 @@
 
 
 
-        <script>
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
 
 
 

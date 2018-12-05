@@ -64,8 +64,8 @@ public class AdminMenuController {
 
     @ResponseBody
     @RequestMapping("/updateMenuUrl")
-    public Object updateMenuUrl(String id,String url){
-        return  menuService.updateMenu(id,url);
+    public Object updateMenuUrl(String id,String url,String name){
+        return  menuService.updateMenu(id,url,name);
     }
 
     @ResponseBody

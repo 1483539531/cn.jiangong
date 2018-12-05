@@ -1,100 +1,63 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>后台登录-X-admin2.0</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <link rel="shortcut icon" href="/favicon.ico" type="/login/image/x-icon" />
+    <link rel="stylesheet" href="/login/css/font.css">
+	<link rel="stylesheet" href="/login/css/xadmin.css">
+    <script src="/js/jquery-1.12.4.js"></script>
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/login/js/xadmin.js"></script>
+
+</head>
+<body class="login-bg">
     
-    <head>
-        <meta charset="utf-8">
-        <title>
-            X-admin v1.0
-        </title>
-        <link rel="stylesheet" href="/css/x-admin.css" media="all">
+    <div class="login layui-anim layui-anim-up">
+        <div class="message">x-admin2.0-管理登录</div>
+        <div id="darkbannerwrap"></div>
+        
+        <form method="post" class="layui-form" >
+            <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+            <hr class="hr15">
+            <input name="pass" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+            <hr class="hr15">
+            <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+            <hr class="hr20" >
+        </form>
+    </div>
 
-        <script src="/js/jquery-1.12.4.js"></script>
-        <link rel="stylesheet" href="/layui/css/layui.css">
-        <script src="/layui/layui.js"></script>
+    <script>
+        layui.use(['laydate', 'element', 'laypage', 'layer', 'form', 'table'], function () {
+            var laydate = layui.laydate;//日期插件
+            var lement = layui.element;//面包导航
+            var laypage = layui.laypage;//分页
+            var layer = layui.layer;//弹出层
+            var form = layui.form;
+            var table = layui.table;
 
-    </head>
+            $('.x-login-right li').click(function (event) {
+                color = $(this).attr('color');
+                $('body').css('background-color', color);
+            });
+
+            //监听提交
+            form.on('submit(login)', function (data) {
+                location.href = "/adminList/login?username=" + data.field.username + "&pass=" + data.field.pass;
+                return false;
+            });
+
+        })
+
+
+    </script>
+
     
-    <body style="background-color: #393D49">
-        <div class="x-box">
-            <div class="x-top">
-                <i class="layui-icon x-login-close">
-                    &#x1007;
-                </i>
-                <ul class="x-login-right">
-                    <li style="background-color: #F1C85F;" color="#F1C85F">
-                    </li>
-                    <li style="background-color: #EA569A;" color="#EA569A">
-                    </li>
-                    <li style="background-color: #393D49;" color="#393D49">
-                    </li>
-                </ul>
-            </div>
-            <div class="x-mid">
-                <div class="x-avtar">
-                    <img src="/images/logo.png" alt="">
-                </div>
-                <div class="input">
 
-
-                    <form class="layui-form">
-
-                        <div class="layui-form-item x-login-box">
-                            <label for="username" class="layui-form-label">
-                                <i class="layui-icon">&#xe612;</i>
-                            </label>
-                            <div class="layui-input-inline">
-                                <input type="text" id="username" name="username" required
-                                autocomplete="off"  class="layui-input">
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item x-login-box">
-                            <label for="pass" class="layui-form-label">
-                                <i class="layui-icon">&#xe628;</i>
-                            </label>
-                            <div class="layui-input-inline">
-                                <input type="password" id="pass" name="pass" required
-                                autocomplete="off"  class="layui-input">
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item" id="loginbtn">
-                            <button  class="layui-btn" lay-filter="save" lay-submit="">
-                                登 录
-                            </button>
-                        </div>
-
-                    </form>
-
-
-
-                </div>
-            </div>
-        </div>
-        <p style="color:#fff;text-align: center;">Copyright © 2017.Company name All rights X-admin </p>
-        <script>
-            layui.use(['laydate', 'element', 'laypage', 'layer', 'form', 'table'], function () {
-                var laydate = layui.laydate;//日期插件
-                var lement = layui.element;//面包导航
-                var laypage = layui.laypage;//分页
-                var layer = layui.layer;//弹出层
-                var form = layui.form;
-                var table = layui.table;
-
-                $('.x-login-right li').click(function (event) {
-                    color = $(this).attr('color');
-                    $('body').css('background-color', color);
-                });
-
-                //监听提交
-                form.on('submit(save)', function (data) {
-                            location.href = "/adminList/login?username=" + data.field.username + "&pass=" + data.field.pass;
-                            return false;
-                        });
-
-            })
-
-        </script>
-    </body>
-
+</body>
 </html>

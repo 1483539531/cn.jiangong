@@ -179,7 +179,7 @@
 
                             <dl class="layui-nav-child">
                                     <dd>
-                                        <a href="javascript:;" _href="./question-list.ftl">轮播列表</a>
+                                        <a href="javascript:;" _href="./zhaobiao-list.ftl">轮播列表</a>
                                     </dd>
                             </dl>
 

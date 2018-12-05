@@ -32,10 +32,12 @@
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>菜单名称
             </label>
+
             <div class="layui-input-inline">
                 <input type="text" id="username" name="username" lay-verify="required"
-                       value="<#if RequestParameters['name']??>${RequestParameters['name']}</#if>" autocomplete="off" class="layui-input">
+                       value="" autocomplete="off" class="layui-input">
             </div>
+
             <div class="layui-form-mid layui-word-aux">
                 <span class="x-red">*</span>将会成为您唯一的登入名
             </div>
@@ -120,7 +122,7 @@
 
     </form>
 </div>
-
+<input type="hidden" id="menuId" value="<#if RequestParameters['id']??>${RequestParameters['id']}</#if>">
 
 
 

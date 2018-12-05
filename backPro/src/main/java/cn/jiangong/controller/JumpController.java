@@ -26,44 +26,45 @@ public class JumpController {
 
 
 
-    //分类管理页面-------------------------------------------
-    @RequestMapping("categoryPage")
-    public String categoryPage(){
-        return "category/category";
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //招标管理------------------------------------------------
+    @RequestMapping("zhaobiaoListPage")
+    public String zhaobiaoListPage(){
+        return "zhaobiao/zhaobiao-list";
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    //问题管理------------------------------------------------
-    @RequestMapping("questionListPage")
-    public String questionListPage(){
-        return "question/question-list";
+    @RequestMapping("zhaobiaoDelPage")
+    public String zhaobiaoDelPage(){
+        return "zhaobiao/zhaobiao-del";
     }
 
-    @RequestMapping("questionDelPage")
-    public String questionDelPage(){
-        return "question/question-del";
+    @RequestMapping("zhaobiaoEditPage")
+    public String zhaobiaoEditPage(){
+        return "zhaobiao/zhaobiao-edit";
     }
 
-    @RequestMapping("questionEditPage")
-    public String questionEditPage(){
-        return "question/question-edit";
+    @RequestMapping("zhaobiaoAddPage")
+    public String zhaobiaoAddPage(){
+        return "zhaobiao/zhaobiao-add";
     }
 
-    @RequestMapping("questionAddPage")
-    public String questionAddPage(){
-        return "question/question-add";
+    @RequestMapping("zhaobiaoListXiangxiPage")
+    public String zhaobiaoListXiangxiPage(){
+        return "zhaobiao/zhaobiao-list-xiangxi";
     }
+
 
 
 
@@ -102,6 +103,14 @@ public class JumpController {
         return "banner/banner-edit";
     }
 
+
+
+
+    //分类管理页面-------------------------------------------
+    @RequestMapping("categoryPage")
+    public String categoryPage(){
+        return "category/category";
+    }
 
 
 
@@ -173,10 +182,12 @@ public class JumpController {
     public String memberAddPage(){
         return "member/member-add";
     }
+
     @RequestMapping("memberShowPage")
     public String memberShowPage(){
         return "member/member-show";
     }
+
     @RequestMapping("memberPasswordPage")
     public String memberPasswordPage(){
         return "member/member-password";

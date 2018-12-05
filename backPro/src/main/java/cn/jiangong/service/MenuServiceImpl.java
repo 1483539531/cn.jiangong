@@ -66,8 +66,8 @@ public class MenuServiceImpl {
     }
 
 
-    public boolean updateMenu(String id,String url){
-        return menuMapper.updateMenu(id,url);
+    public boolean updateMenu(String id,String url,String name){
+        return menuMapper.updateMenu(id,url,name);
     }
 
     public boolean deleteMenu(String id){
