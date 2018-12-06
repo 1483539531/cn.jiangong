@@ -5,13 +5,16 @@
         <title>
             X-admin v1.0
         </title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="./css/x-admin.css" media="all">
+
+        <script src="/js/jquery-1.12.4.js"></script>
+        <link rel="stylesheet" href="/layui/css/layui.css">
+        <script src="/layui/layui.js"></script>
+        <style>
+            .x-body{
+                padding: 20px;
+            }
+        </style>
+
     </head>
     <body>
 
@@ -30,91 +33,34 @@
             <form class="layui-form x-center" action="" style="width:800px">
                 <div class="layui-form-pane" style="margin-top: 15px;">
                   <div class="layui-form-item">
-                    <label class="layui-form-label">日期范围</label>
+
                     <div class="layui-input-inline">
-                      <input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
+                      <input class="layui-input date" name="startDate" placeholder="开始日" id="startDate">
                     </div>
+
                     <div class="layui-input-inline">
-                      <input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
+                      <input class="layui-input date" name="endDate" placeholder="截止日" id="endDate">
                     </div>
+
                     <div class="layui-input-inline">
                       <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
                     </div>
+
                     <div class="layui-input-inline" style="width:80px">
                         <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
                     </div>
+
                   </div>
                 </div> 
             </form>
             <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加用户','member-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
-            <table class="layui-table">
-                <thead>
-                    <tr>
-                        <th>
-                            <input type="checkbox" name="" value="">
-                        </th>
-                        <th>
-                            ID
-                        </th>
-                        <th>
-                            用户名
-                        </th>
-                        <th>
-                            性别
-                        </th>
-                        <th>
-                            手机
-                        </th>
-                        <th>
-                            邮箱
-                        </th>
-                        <th>
-                            地址
-                        </th>
-                        <th>
-                            加入时间
-                        </th>
-                        <th>
-                            状态
-                        </th>
-                        <th>
-                            操作
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
+           <#-- <table class="layui-table">
+
                         <td>
-                            <input type="checkbox" value="1" name="">
-                        </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <u style="cursor:pointer" onclick="member_show('张三','member-show.ftl','10001','360','400')">
+                            <u style="cursor:pointer" onclick="member_show('张三','memberShowPage','10001','360','400')">
                                 小明
                             </u>
-                        </td>
-                        <td >
-                            男
-                        </td>
-                        <td >
-                            13000000000
-                        </td>
-                        <td >
-                            admin@mail.com
-                        </td>
-                        <td >
-                            北京市 海淀区
-                        </td>
-                        <td>
-                            2017-01-01 11:11:42
-                        </td>
-                        <td class="td-status">
-                            <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                已启用
-                            </span>
-                        </td>
+
                         <td class="td-manage">
                             <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
                                 <i class="layui-icon">&#xe601;</i>
@@ -131,63 +77,80 @@
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            </table>-->
 
-            <div id="page"></div>
+        <table id="firstTable" lay-filter="firstTable"></table>
+
         </div>
-        <script src="./lib/layui/layui.js" charset="utf-8"></script>
-        <script src="./js/x-layui.js" charset="utf-8"></script>
+
+
+
         <script>
-            layui.use(['laydate','element','laypage','layer'], function(){
-                $ = layui.jquery;//jquery
-              laydate = layui.laydate;//日期插件
-              lement = layui.element();//面包导航
-              laypage = layui.laypage;//分页
-              layer = layui.layer;//弹出层
+            layui.use(['laydate','element', 'laypage', 'layer', 'form', 'table'],function () {
+                var laydate = layui.laydate;
+                var lement = layui.element;//面包导航
+                var laypage = layui.laypage;//分页
+                var layer = layui.layer;//弹出层
+                var form = layui.form;
+                var table = layui.table;
+              
 
-              //以上模块根据需要引入
+                table.render({
+                    elem: '#firstTable'
+                    , id: 'table'
+                    , url: '/member/selectUserList'  //数据接口
+                    , page: true        //开启分页
+                    ,toolbar: true
+                    , cols: [[          //表头-
+                        {field: 'id', title: 'id'}
+                        , {field: 'zhanghao', title: '账号'}
+                        , {field: 'uname', title: '姓名'}
+                        , {field: 'phone', title: '电话'}
+                        , {field: 'email', title: '邮箱'}
+                        , {field: 'dengjiValue', title: '会员登记'}
+                       /* ,{field: 'zhuangtai', title: '状态',templet: '#state'}*/
+                        ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
 
-              laypage({
-                cont: 'page'
-                ,pages: 100
-                ,first: 1
-                ,last: 100
-                ,prev: '<em><</em>'
-                ,next: '<em>></em>'
-              }); 
-              
-              var start = {
-                min: laydate.now()
-                ,max: '2099-06-16 23:59:59'
-                ,istoday: false
-                ,choose: function(datas){
-                  end.min = datas; //开始日选好后，重置结束日的最小日期
-                  end.start = datas //将结束日的初始值设定为开始日
-                }
-              };
-              
-              var end = {
-                min: laydate.now()
-                ,max: '2099-06-16 23:59:59'
-                ,istoday: false
-                ,choose: function(datas){
-                  start.max = datas; //结束日选好后，重置开始日的最大日期
-                }
-              };
-              
-              document.getElementById('LAY_demorange_s').onclick = function(){
-                start.elem = this;
-                laydate(start);
-              }
-              document.getElementById('LAY_demorange_e').onclick = function(){
-                end.elem = this
-                laydate(end);
-              }
-              
+                    ]]
+                    , limit: 2
+                    , limits: [2, 5, 10]
+                })
+
+
+
+                table.on('tool(firstTable)',function (obj) {
+                    var data = obj.data;
+
+                    if(obj.event === 'del'){
+                        layer.confirm('真的删除行么', {
+                            skin: 'layui-layer-molv' //样式类名
+                            ,closeBtn: 0
+                        }, function(index){
+                            deleteMenu(data.id)
+                            obj.del();
+                            layer.close(index);
+                        });
+                    }else if(obj.event === 'edit'){
+                        layer.open({
+                            type: 2,
+                            area: ['800px', '550px'],
+                            fixed: false, //不固定
+                            maxmin: true,
+                            content: '/memberEditPage?id='+data.id
+                        });
+                    }
+
+                })
+
+
+
+
+
             });
+
+
+
+
 
             //批量删除提交
              function delAll () {
@@ -234,23 +197,15 @@
             function member_password(title,url,id,w,h){
                 x_admin_show(title,url,w,h);  
             }
-            /*用户-删除*/
-            function member_del(obj,id){
-                layer.confirm('确认要删除吗？',function(index){
-                    //发异步删除数据
-                    $(obj).parents("tr").remove();
-                    layer.msg('已删除!',{icon:1,time:1000});
-                });
-            }
+
             </script>
-            <script>
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
+
+
+    <script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+
+
     </body>
 </html>

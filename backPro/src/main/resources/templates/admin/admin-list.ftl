@@ -60,7 +60,7 @@
 
     <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
-        <button class="layui-btn" onclick="admin_add()">添加</button>
+        <button class="layui-btn" id="insert">添加</button>
     </xblock>
     <#--   <a title="编辑" href="javascript:;" onclick="admin_edit('编辑','admin-edit.ftl','4','','510')"></a>
 -->
@@ -162,7 +162,26 @@
 
         })
 
-
+        $("#insert").click(function () {
+            admin_add()
+        })
+        function admin_add() {
+            layer.open({
+                type: 2,
+                area: ['700px', '500px'],
+                fixed: false, //不固定
+                maxmin: true,
+                content: '/adminAddPage',
+                end:function () {
+                    table.reload('table', {
+                        url: '/adminList/selectBackUserList'
+                        ,page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                    });
+                }
+            });
+        }
 
 
 
@@ -192,15 +211,7 @@
 
 
     /*添加*/
-    function admin_add() {
-        layer.open({
-            type: 2,
-            area: ['700px', '500px'],
-            fixed: false, //不固定
-            maxmin: true,
-            content: '/adminAddPage'
-        });
-    }
+
 
 
 </script>

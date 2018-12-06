@@ -86,7 +86,6 @@ public class AdminListController {
     @RequestMapping("updateBackUser")
     public Object updateBackUser(String zhanghao, String password,Integer userId,Integer roleId){
            boolean s = userService.updateBackUser(zhanghao, password, userId, roleId);
-             System.out.println(s);
             return  s;
     }
 

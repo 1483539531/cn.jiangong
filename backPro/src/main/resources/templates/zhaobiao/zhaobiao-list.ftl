@@ -6,7 +6,7 @@
             X-admin v1.0
         </title>
 
-        <script src="/js/jquery-1.12.4.js"></script>
+        <script src="s/jquery-1.12.4.js"></script>
         <link rel="stylesheet" href="/layui/css/layui.css">
         <script src="/layui/layui.js"></script>
         <style>
@@ -133,7 +133,6 @@
                         ,{field: 'id', title: 'id'}
                         ,{field: 'zhuangtai', title: '状态',templet: '#state'}
                         ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
-
                     ]]
                     , limit: 2
                     , limits: [2, 5, 10]
@@ -161,7 +160,7 @@
                     }else if(obj.event === 'edit'){
                         layer.open({
                             type: 2,
-                            area: ['700px', '500px'],
+                            area: ['1200px', '550px'],
                             fixed: false, //不固定
                             maxmin: true,
                             content: '/zhaobiaoListXiangxiPage?id='+data.id

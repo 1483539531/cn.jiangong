@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.jiangong.mapper.MemberMapper">
+
+    <select id="selectUserList" resultType="User">
+        select *,(SELECT cname FROM dictionary WHERE ctypeno = u.dengji) dengjiValue  from user u
+    </select>
+
+    <select id="selectUser" resultType="User">
+        <if test="isCompony == 0">
+            select * from user where id = #{id}
+        </if>
+        <if test="isCompony > 0">
+            SELECT u.id,zhanghao,uname,phone,email,c.id cid,c.name cname,c.`position`,sheng,city
+            FROM USER u JOIN company c ON u.`id`=c.`userid` where u.id = #{id}
+        </if>
+    </select>
+</mapper>

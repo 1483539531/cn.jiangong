@@ -67,7 +67,7 @@ public class UserServiceImpl {
     @Transactional
     public boolean updateBackUser(String zhanghao, String password,Integer userId,Integer roleId){
         userPrivilegeMapper.delete(userId);
-        if(userMapper.updateBackUser(zhanghao,password)
+        if(userMapper.updateBackUser(zhanghao,password,userId)
                 &&  userPrivilegeMapper.insert(userId, roleId)){
             return true;
         }

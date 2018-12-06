@@ -22,8 +22,9 @@ public interface UserMapper {
      boolean updateBackUserState(
              @Param("state") Integer state,@Param("id") String id);
 
-     @Update("update backUser set zhanghao = #{zhanghao},password = #{password}")
-     boolean updateBackUser(@Param("zhanghao") String zhanghao,@Param("password") String password);
+     @Update("update backUser set zhanghao = #{zhanghao},password = #{password} where id = #{id}")
+     boolean updateBackUser(
+             @Param("zhanghao") String zhanghao,@Param("password") String password,@Param("id") Integer id);
 
      @Update("UPDATE backuser SET logindate = NOW() where id = #{id}")
      public boolean updateLoginDate(String id);
