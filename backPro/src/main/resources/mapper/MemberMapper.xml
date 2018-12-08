@@ -4,8 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.jiangong.mapper.MemberMapper">
 
+    <update id="updateUser">
+        update user set uname = #{uname},phone =#{phone},email = #{email} where id = #{id}
+    </update>
+    <update id="updatePass">
+         update user set password = #{password} where id = #{id}
+    </update>
+
     <select id="selectUserList" resultType="User">
         select *,(SELECT cname FROM dictionary WHERE ctypeno = u.dengji) dengjiValue  from user u
+        <where>
+            <if test="startDate !=null and startDate != ''">
+                  and login > #{startDate}
+            </if>
+            <if test="endDate !=null and endDate != ''">
+                  and login &lt; #{endDate}
+            </if>
+            <if test="user.uname !=null and user.uname !=''">
+                and uname like concat ('%',#{user.uname},'%')
+            </if>
+        </where>
     </select>
 
     <select id="selectUser" resultType="User">

@@ -22,6 +22,12 @@ public class User {
   private int dengjiover;
   private int tiaoshu;
   private String dengjiValue;
+  private String cid;
+  private String cname;
+  private String position;
+  private String sheng;
+  private String city;
+  private Date login;
 
 
 

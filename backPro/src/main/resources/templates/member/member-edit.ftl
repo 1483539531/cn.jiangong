@@ -90,41 +90,6 @@
 
 
 
-
-                <div class="layui-form-item">
-
-
-                    <label for="L_city" class="layui-form-label">
-                       打
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_city" name="city" autocomplete="off" value="广州"
-                        class="layui-input">
-                    </div>
-
-
-                </div>
-
-
-
-                <div class="layui-form-item layui-form-text">
-
-
-
-                    <label for="L_sign" class="layui-form-label">
-                        签名
-                    </label>
-                    <div class="layui-input-block">
-                        <textarea placeholder="随便写些什么刷下存在感" id="L_sign" name="sign" autocomplete="off"
-                        class="layui-textarea" style="height: 80px;"></textarea>
-                    </div>
-
-
-                </div>
-
-
-
-
                 <div class="layui-form-item">
 
                     <label for="L_sign" class="layui-form-label">
@@ -138,7 +103,7 @@
 
             </form>
         </div>
-        <input type="text" id="userId" name="userId" value="<#if RequestParameters['id']??>${RequestParameters['id']}</#if>">
+        <input type="hidden" id="userId" name="userId" value="<#if RequestParameters['id']??>${RequestParameters['id']}</#if>">
 
 
         <script>
@@ -155,18 +120,33 @@
                         "url":"/member/selectUser?id="+$("#userId").val()
                         ,"dataType" : "json"
                         ,"success" : function (data) {
-                           console.log(data)
+                           $("#name").val(data.uname);
+                            $("#phone").val(data.phone);
+                            $("#email").val(data.email);
+                            $("#companyName").val(data.cname);
+                            $("#companyPosition").val(data.position);
                         }
                     })
                 }
 
 
 
-
+                function updateUser(cname,position,userid,uname,phone,email){
+                    $.ajax({
+                        "url":"/member/updateUser"
+                        ,"data" : {"cname":cname,"position":position,"id":userid,"uname":uname,"phone":phone,"email":email}
+                        ,"dataType" : "json"
+                    })
+                }
 
 
               form.on('submit(save)', function(data){
-                console.log(data);
+                  var uname = data.field.name;
+                  var phone = data.field.phone;
+                  var email = data.field.email;
+                  var cname = data.field.companyName;
+                  var position = data.field.companyPosition
+                  updateUser(cname,position,$("#userId").val(),uname,phone,email)
                 //发异步，把数据提交给php
                 layer.alert("增加成功", {icon: 6},function () {
                     // 获得frame索引

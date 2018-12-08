@@ -156,7 +156,15 @@
                     area: ['700px', '500px'],
                     fixed: false, //不固定
                     maxmin: true,
-                    content: '/adminEditPage?id='+data.id
+                    content: '/adminEditPage?id='+data.id,
+                    end:function(){
+                        table.reload('table', {
+                            url: '/adminList/selectBackUserList'
+                            ,page: {
+                                curr: 1 //重新从第 1 页开始
+                            }
+                        });
+                    }
                 });
             }
 

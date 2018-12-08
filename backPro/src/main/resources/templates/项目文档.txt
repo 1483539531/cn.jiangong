@@ -1,3 +1,2 @@
 _href写链接为在区域显示
 <#if RequestParameters['name']??>${RequestParameters['name']}</#if>
-每个管理怎么分子管理呢：比如会员管理  有会员表和积分表和等级三个表可以分别管理别写到一个里面

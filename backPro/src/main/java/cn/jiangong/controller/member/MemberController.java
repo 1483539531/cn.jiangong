@@ -23,6 +23,9 @@ public class MemberController {
     @ResponseBody
     @RequestMapping("/selectUserList")
     public Object selectUserList(Integer page, Integer limit,String startDate,String endDate, User user){
+        System.out.println(startDate);
+        System.out.println(endDate);
+        System.out.println(user);
         PageInfo<User> pageInfo = memberService.selectUserList(page, limit, startDate, endDate, user);
         HashMap<String,Object> hashMap = new HashMap<String, Object>();
         hashMap.put("code",0);
@@ -38,6 +41,35 @@ public class MemberController {
         User user = memberService.selectUser(id);
         return JSON.toJSONString(user);
     }
+
+
+    @ResponseBody
+    @RequestMapping("/selectUserPass")
+    public Object selectUserPass(String id){
+        User user = memberService.selectUserPass(id);
+        return JSON.toJSONString(user);
+    }
+
+    @ResponseBody
+    @RequestMapping("/updatePass")
+    public Object updatePass(User user){
+        return memberService.updatePass(user);
+    }
+
+    @ResponseBody
+    @RequestMapping("/updateUser")
+    public Object updateUser(User user){
+        boolean b = memberService.updateUser(user);
+        return b;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/deleteUser")
+    public Object deleteUser(Integer id){
+        return memberService.deleteUser(id);
+    }
+
 
 
 
