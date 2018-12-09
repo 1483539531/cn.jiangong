@@ -24,11 +24,6 @@
 
 
 <div class="x-nav">
-    <span class="layui-breadcrumb">
-        <a><cite>首页</cite></a>
-        <a><cite>会员管理</cite></a>
-        <a><cite>权限规则</cite></a>
-    </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 
@@ -62,7 +57,6 @@
     </form>
 
 
-    <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()">批量删除</button></xblock>
 
     <table id="firstTable" lay-filter="firstTable"></table>
 
@@ -211,7 +205,6 @@
     })
 </script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 </body>

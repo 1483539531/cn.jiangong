@@ -1,6 +1,7 @@
 package cn.jiangong.mapper;
 
 import cn.jiangong.entity.BackUser;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -33,6 +34,10 @@ public interface UserMapper {
      BackUser selectRoleId(String id);
 
      boolean insertBackUser(BackUser backUser);
+
+
+     @Delete("delete from backUser where id = #{id} ")
+     boolean deleteBackUser(String id);
 
 
 

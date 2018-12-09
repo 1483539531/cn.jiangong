@@ -24,11 +24,7 @@
 
 
 <div class="x-nav">
-    <span class="layui-breadcrumb">
-        <a><cite>首页</cite></a>
-        <a><cite>会员管理</cite></a>
-        <a><cite>角色管理</cite></a>
-    </span>
+
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 
@@ -36,7 +32,6 @@
 <div class="x-body">
             
     <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
         <button class="layui-btn" onclick="role_add()"><i class="layui-icon">&#xe608;</i>添加</button>
     </xblock>
 

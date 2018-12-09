@@ -23,11 +23,6 @@
 
 
 <div class="x-nav">
-    <span class="layui-breadcrumb">
-        <a><cite>首页</cite></a>
-        <a><cite>会员管理</cite></a>
-        <a><cite>轮播列表</cite></a>
-    </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 
@@ -59,7 +54,6 @@
 
 
     <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
         <button class="layui-btn" id="insert">添加</button>
     </xblock>
     <#--   <a title="编辑" href="javascript:;" onclick="admin_edit('编辑','admin-edit.ftl','4','','510')"></a>
@@ -146,7 +140,7 @@
                     skin: 'layui-layer-molv' //样式类名
                     ,closeBtn: 0
                 }, function(index){
-                    deleteMenu(data.id)
+                    deleteBackUser(data.id)
                     obj.del();
                     layer.close(index);
                 });
@@ -191,6 +185,18 @@
             });
         }
 
+        function deleteBackUser(id) {
+            $.ajax({
+                "url" : "/adminList/deleteBackUser"
+                ,"data" :{"id":id}
+                ,"type" : "GET"
+                ,"dateType" : "json"
+                ,"success":function (data) {
+                    alert(data)
+                }
+
+            })
+        }
 
 
     });

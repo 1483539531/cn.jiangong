@@ -32,6 +32,16 @@
                     </div>
                 </div>
 
+                <div class="layui-form-item">
+                    <label for="L_username" class="layui-form-label">
+                        <span class="x-red">*</span>账号
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="zhanghao" name="zhanghao" required="" lay-verify="nikename"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
 
                 <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
@@ -121,11 +131,11 @@
 
 
 
-                function insertUser(name,pass,email,phone){
+                function insertUser(name,pass,email,phone,zhanghao){
                     $.ajax({
                         "url":"/member/insertUser"
                         ,"dataType":"json"
-                        ,"data":{uname:name,password:pass,email:email,phone:phone}
+                        ,"data":{uname:name,password:pass,email:email,phone:phone,zhanghao:zhanghao}
                     })
                 }
 
@@ -136,7 +146,9 @@
                     var pass = dataV.pass;
                     var email = dataV.email;
                     var phone = dataV.phone;
-                  insertUser(name,pass,email,phone);
+                  var zhanghao = dataV.zhanghao;
+                  insertUser(name,pass,email,phone,zhanghao);
+
                 layer.alert("增加成功", {icon: 6},function () {
                     // 获得frame索引
                     var index = parent.layer.getFrameIndex(window.name);

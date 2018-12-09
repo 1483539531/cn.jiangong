@@ -167,6 +167,18 @@ public class JumpController {
     public String memberLevelPage(){
         return "member/member-level";
     }
+
+    @RequestMapping("memberLevelEditPage")
+    public String memberLevelEditPage(){
+        return "member/level-edit";
+    }
+
+    @RequestMapping("memberLevelAddPage")
+    public String memberLevelAddPage(){
+        return "member/level-add";
+    }
+
+
     //积分管理
     @RequestMapping("memberKissPage")
     public String memberKissPage(){

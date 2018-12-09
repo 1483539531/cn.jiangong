@@ -5,13 +5,14 @@
         <title>
             X-admin v1.0
         </title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="./css/x-admin.css" media="all">
+        <script src="/js/jquery-1.12.4.js"></script>
+        <link rel="stylesheet" href="/layui/css/layui.css">
+        <script src="/layui/layui.js"></script>
+        <style>
+            .x-body{
+                padding: 20px;
+            }
+        </style>
     </head>
     <body>
         <div class="x-nav">
@@ -23,41 +24,10 @@
             <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
         </div>
         <div class="x-body">
-            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="level_add('添加等级','level-add.html','','400')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
-            <table class="layui-table">
-                <thead>
-                    <tr>
-                        <th>
-                            <input type="checkbox" name="" value="">
-                        </th>
-                        <th>
-                            ID
-                        </th>
-                        <th>
-                            等级名
-                        </th>
-                        <th>
-                            积分范围
-                        </th>
-                        <th>
-                            操作
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="">
-                        </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            新手
-                        </td>
-                        <td >
-                            0-1000
-                        </td>
+            <xblock>
+                <button class="layui-btn" onclick="level_add('添加等级','level-add.html','','400')">
+                    <i class="layui-icon">&#xe608;</i>添加</button></xblock>
+               <#--
                         <td class="td-manage">
                             <a title="编辑" href="javascript:;" onclick="level_edit('编辑','level-edit.html','4','','300')"
                             style="text-decoration:none">
@@ -67,21 +37,89 @@
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        </td>-->
         </div>
-        <script src="./lib/layui/layui.js" charset="utf-8"></script>
-        <script src="./js/x-layui.js" charset="utf-8"></script>
+
+
+        <table id="firstTable" lay-filter="firstTable"></table>
+
+
+
         <script>
-            layui.use(['element','layer'], function(){
-                $ = layui.jquery;//jquery
-              lement = layui.element();//面包导航
-              layer = layui.layer;//弹出层
+            layui.use(['laydate','element', 'laypage', 'layer', 'form', 'table'],function () {
+                var laydate = layui.laydate;
+                var lement = layui.element;//面包导航
+                var laypage = layui.laypage;//分页
+                var layer = layui.layer;//弹出层
+                var form = layui.form;
+                var table = layui.table;
+
+
+                table.render({
+                    elem: '#firstTable'
+                    , id: 'table'
+                    , url: '/memberLevel/selectList'  //数据接口
+                    , cols: [[          //表头-
+                        {field: 'cid', title: 'id'}
+                        , {field: 'cname', title: '名称'}
+                        , {field: 'cmoney', title: '价钱'}
+                        , {field: 'ctiao', title: '条数'}
+                        , {fixed: 'right', title: '操作', toolbar: '#barDemo'}
+                    ]]
+                })
+
+
+
+                table.on('rowDouble(firstTable)', function(obj){
+                   var id = obj.data.cid;
+                    layer.open({
+                        type: 2,
+                        area: ['800px', '550px'],
+                        fixed: false, //不固定
+                        maxmin: true,
+                        content: '/memberLevelEditPage?id='+id,
+                        end:function () {
+                            table.reload('table', {
+                                url: '/memberLevel/selectList'
+                                ,page: {
+                                    curr: 1 //重新从第 1 页开始
+                                }
+                            });
+                        }
+
+                    });
+                });
+
+
+
+
+
+
+                table.on('tool(firstTable)',function (obj) {
+                    var data = obj.data;
+
+                    if(obj.event === 'del'){
+                        layer.confirm('真的删除行么', {
+                            skin: 'layui-layer-molv' //样式类名
+                            ,closeBtn: 0
+                        }, function(index){
+                            deleteUser(data.id)
+                            obj.del();
+                            layer.close(index);
+                        });
+                    }
+                })
+
+
 
 
             })
+
+
+
+
+
+
 
               
             //批量删除提交
@@ -109,14 +147,9 @@
                 });
             }
             </script>
-            <script>
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
+
+        <script type="text/html" id="barDemo">
+            <a class="layui-btn layui-btn-danger  layui-btn-xs" lay-event="del">删除</a>
         </script>
     </body>
 </html>

@@ -43,7 +43,7 @@
             <div class="layui-header header header-demo">
                 <div class="layui-main">
 
-                    <a class="logo" href="/indexPage">建设网1</a>
+                    <a class="logo" href="/indexPage">建设网</a>
 
                     <ul class="layui-nav" lay-filter="">
                         <!--logo图片-->
@@ -52,8 +52,8 @@
                       <li class="layui-nav-item">
                         <a href="javascript:;">用户name</a>
                         <dl class="layui-nav-child"> <!-- 二级菜单 -->
-                          <dd><a href="">个人信息</a></dd>
-                          <dd><a href="">切换帐号</a></dd>
+                          <#--<dd><a href="">个人信息</a></dd>
+                          <dd><a href="">切换帐号</a></dd>-->
                           <dd><a href="/loginPage">退出</a></dd>
                         </dl>
                       </li>
@@ -63,7 +63,7 @@
                             <i class="layui-icon" style="top: 1px;">&#xe63a;</i>
                         </a>
                         </li> -->
-                      <li class="layui-nav-item x-index"><a href="/">前台首页</a></li>
+                  <#--    <li class="layui-nav-item x-index"><a href="/">前台首页</a></li>-->
                     </ul>
 
                 </div>

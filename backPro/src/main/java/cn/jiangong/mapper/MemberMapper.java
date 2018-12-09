@@ -2,12 +2,15 @@ package cn.jiangong.mapper;
 
 import cn.jiangong.entity.User;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 public interface MemberMapper {
+
+    boolean insertUser(User user);
 
 
     List<User> selectUserList(@Param("startDate") String startDate,@Param("endDate") String endDate,@Param("user") User user);
@@ -27,5 +30,11 @@ public interface MemberMapper {
 
     @Delete("delete from user where id = #{id}")
     boolean deleteUser(Integer id);
+
+
+
+
+
+
 
 }

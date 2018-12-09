@@ -2,14 +2,10 @@ package cn.jiangong.service;
 
 
 import cn.jiangong.entity.BackUser;
-import cn.jiangong.entity.Categorys;
-import cn.jiangong.entity.UserPrivilege;
 import cn.jiangong.mapper.UserMapper;
 import cn.jiangong.mapper.UserPrivilegeMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,6 +74,8 @@ public class UserServiceImpl {
         return userMapper.selectRoleId(id);
     }
 
-
+    public boolean deleteBackUser(String id){
+        return userMapper.deleteBackUser(id);
+    }
 
 }

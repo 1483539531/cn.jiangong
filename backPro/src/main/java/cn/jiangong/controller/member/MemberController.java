@@ -71,6 +71,12 @@ public class MemberController {
     }
 
 
+  @ResponseBody
+    @RequestMapping("/insertUser")
+    public Object insertUser(User user){
+        return memberService.insertUser(user);
+    }
+
 
 
 }

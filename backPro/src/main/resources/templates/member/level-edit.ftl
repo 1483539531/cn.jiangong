@@ -6,43 +6,52 @@
         <title>
             X-admin v1.0
         </title>
-        <meta name="renderer" content="webkit">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="format-detection" content="telephone=no">
-        <link rel="stylesheet" href="./css/x-admin.css" media="all">
+        <script src="/js/jquery-1.12.4.js"></script>
+        <link rel="stylesheet" href="/layui/css/layui.css">
+        <script src="/layui/layui.js"></script>
+        <style>
+            .x-body{
+                padding: 20px;
+            }
+        </style>
     </head>
     <body>
         <div class="x-body">
             <form class="layui-form">
+
+
                 <div class="layui-form-item">
                     <label for="level-id" class="layui-form-label">
-                        id
+                        名称
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="level-id" name="level-id" disabled="" value="20" class="layui-input">
+                        <input type="text" id="name" name="name"  class="layui-input" lay-verify="required">
                     </div>
                 </div>
+
+
                 <div class="layui-form-item">
                     <label for="level-name" class="layui-form-label">
-                        <span class="x-red">*</span>等级名
+                        <span class="x-red">*</span>价钱
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="level-name" name="level-name" required="" lay-verify="required"
-                        autocomplete="off" value="新手" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="level-kiss" class="layui-form-label">
-                        <span class="x-red">*</span>积分
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="level-kiss" name="level-kiss" required="" value="0-1000" lay-verify="required"
+                        <input type="text" id="money" name="money" required="" lay-verify="number"
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>
+
+
+                <div class="layui-form-item">
+                    <label for="level-kiss" class="layui-form-label">
+                        <span class="x-red">*</span>信息条数
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="tiao" name="tiao" required=""  lay-verify="number"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>
@@ -50,22 +59,73 @@
                         保存
                     </button>
                 </div>
+
+
             </form>
         </div>
-        <script src="./lib/layui/layui.js" charset="utf-8">
-        </script>
-        <script src="./js/x-layui.js" charset="utf-8">
-        </script>
+
+        <input type="hidden" id="levelId" name="levelId" value="<#if RequestParameters['id']??>${RequestParameters['id']}</#if>">
+
+
+
+
+
+
         <script>
-            layui.use(['form','layer'], function(){
-                $ = layui.jquery;
-              var form = layui.form()
-              ,layer = layui.layer;
-            
+            layui.use(['laydate','element', 'laypage', 'layer', 'form', 'table'],function () {
+                var laydate = layui.laydate;
+                var lement = layui.element;//面包导航
+                var laypage = layui.laypage;//分页
+                var layer = layui.layer;//弹出层
+                var form = layui.form;
+                var table = layui.table;
+
+
+
+
+                function updateLevel(cname,cmoney,ctiao,cid){
+                    $.ajax({
+                        "url":"/memberLevel/updateLevel",
+                        "data":{cname:cname,cmoney:cmoney,ctiao:ctiao,cid:cid},
+                        "dataType":"json",
+                        "Type":"POST",
+                    })
+                }
+
+                selectLevel();
+
+                function selectLevel(){
+                    var cid = $("#levelId").val();
+                    $.ajax({
+                        "url":"/memberLevel/selectList",
+                        "data":{cid:cid},
+                        "dataType":"json",
+                        "Type":"POST",
+                        "success":function (data) {
+                            console.log(JSON.stringify(data))
+                           $("#name").val(data.data[0].cname);
+                         $("#money").val(data.data[0].cmoney);
+                             $("#tiao").val(data.data[0].ctiao);
+                        }
+                    })
+                }
+
+
+                form.verify({
+                    number: [/[0-9]/, '必须是数字']
+                });
+
+
+
               //监听提交
               form.on('submit(save)', function(data){
-                console.log(data);
-                //发异步，把数据提交给php
+                var cname = $("#name").val();
+                var cmoney = $("#money").val();
+                var ctiao = $("#tiao").val();
+                var cid = $("#levelId").val();
+
+                updateLevel(cname,cmoney,ctiao,cid);
+
                 layer.alert("修改成功", {icon: 6},function () {
                     // 获得frame索引
                     var index = parent.layer.getFrameIndex(window.name);
@@ -74,7 +134,12 @@
                 });
                 return false;
               });
-              
+
+
+
+
+
+
               
             });
         </script>

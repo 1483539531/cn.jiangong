@@ -21,6 +21,7 @@ public class AdminListController {
 
     @Autowired
     UserServiceImpl userService;
+
     @Autowired
     RoleServiceImpl roleService;
 
@@ -95,6 +96,12 @@ public class AdminListController {
         System.out.println(backUser);
         System.out.println(roleId1);
         return userService.insertBackUser(backUser,roleId1);
+    }
+
+    @ResponseBody
+    @RequestMapping("deleteBackUser")
+    public boolean deleteBackUser(String id){
+        return userService.deleteBackUser(id);
     }
 
 }

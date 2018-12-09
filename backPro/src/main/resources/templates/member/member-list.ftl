@@ -54,15 +54,9 @@
                 </div> 
             </form>
             <xblock>
-
-                <button class="layui-btn layui-btn-danger" onclick="delAll()">
-                    <i class="layui-icon">&#xe640;</i>批量删除
-                </button>
-
                 <button class="layui-btn" id="insert" onclick="member_add('添加用户','member-add.html','600','500')">
                     <i class="layui-icon">&#xe608;</i>添加
                 </button>
-
             </xblock>
            <#-- <table class="layui-table">
 
@@ -217,8 +211,17 @@
                         area: ['800px', '550px'],
                         fixed: false, //不固定
                         maxmin: true,
-                        content: '/memberAddPage'
+                        content: '/memberAddPage',
+                        end:function () {
+                            table.reload('table', {
+                                url: '/member/selectUserList'
+                                ,page: {
+                                    curr: 1 //重新从第 1 页开始
+                                }
+                            });
+                        }
                     });
+
                 })
                 
                 

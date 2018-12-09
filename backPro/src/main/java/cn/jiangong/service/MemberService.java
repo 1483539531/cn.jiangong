@@ -64,6 +64,10 @@ public class MemberService {
         return memberMapper.deleteUser(id);
     }
 
+    public  boolean insertUser(User user){
+        return memberMapper.insertUser(user);
+    }
+
 
 
 }
