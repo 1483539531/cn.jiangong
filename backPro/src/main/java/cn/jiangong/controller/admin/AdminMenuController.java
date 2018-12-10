@@ -1,6 +1,5 @@
 package cn.jiangong.controller.admin;
 
-import cn.jiangong.entity.BackUser;
 import cn.jiangong.entity.Menu;
 import cn.jiangong.service.MenuServiceImpl;
 import cn.jiangong.service.UserServiceImpl;

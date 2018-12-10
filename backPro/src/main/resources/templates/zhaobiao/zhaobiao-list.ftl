@@ -6,7 +6,7 @@
             X-admin v1.0
         </title>
 
-        <script src="s/jquery-1.12.4.js"></script>
+        <script src="/js/jquery-1.12.4.js"></script>
         <link rel="stylesheet" href="/layui/css/layui.css">
         <script src="/layui/layui.js"></script>
         <style>
@@ -49,8 +49,11 @@
                      </div>
 
                       <div class="layui-input-inline">
-                         <input type="text" name="address"  placeholder="地址" autocomplete="off" class="layui-input">
-                    </div>
+                          <select id="address" name="address" lay-verify="" lay-search placeholder="地址">
+                              <option value="">请选择</option>
+                          </select>
+                      </div>
+
 
                     <div class="layui-input-inline" style="width:80px">
                         <button class="layui-btn"  lay-submit="" lay-filter="sreach">搜索</button>
@@ -59,7 +62,7 @@
                   </div>
                 </div> 
             </form>
-            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="question_add('添加问题','zhaobiao-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+
            <#-- <table class="layui-table">
 
                 <tbody>
@@ -197,15 +200,16 @@
                 form.on('switch(switchTest)',function (data) {
                     updateState(data.elem.checked,data.value)
                 })
-
                 selectNumber();
                 function selectNumber() {
                     $.ajax({
                         "url" : "/zhaobiao/selectNumber"
                         ,"dataType" : "json"
                         ,"success" : function (data) {
+                            console.log(JSON.stringify(data))
                             for (var i = 0; i < data.length; i++) {
                                 $("#number").append("<option value="+data[i].zhaobiaoNumber+">"+data[i].zhaobiaoNumber+"</option>")
+                                $("#address").append("<option value="+data[i].cityAddress+">"+data[i].cityAddressValue+"</option>")
                             }
                             form.render();
                         }
@@ -271,7 +275,6 @@
 
     <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
     </body>
 </html>

@@ -18,7 +18,7 @@ public interface ZhaobiaoMapper {
     List<Zhaobiao> selectZhaobiaoListToId(String id);
 
 
-    @Select("select zhaobiao_number from zhaobiao")
+    @Select("SELECT zhaobiao_number,city_address,c.`value` cityAddressValue FROM zhaobiao z JOIN categorys c ON z.`city_address`=c.`id`")
     List<Zhaobiao> selectNumber();
 
 
